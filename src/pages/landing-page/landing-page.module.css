@@ -1,0 +1,25 @@
+.landing_page_wrapper {
+  display: grid;
+  height: 100vh;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
+.hero_text_section {
+  padding: var(--scale-lg);
+}
+.hero_img_section {
+  padding: var(--scale-lg);
+  align-self: center;
+}
+
+@media screen and (max-width: 480px) {
+  .landing_page_wrapper {
+    padding: var(--scale-sm);
+  }
+  .hero_img_section {
+    padding: var(--scale-sm);
+  }
+  .hero_text_section {
+    padding: var(--scale-sm);
+  }
+}
