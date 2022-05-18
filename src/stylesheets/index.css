@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+  --default-text-color: #22181c;
+  --defalult-bg-color: #f7f7f7;
+  --default-color: #4062BB;
+  --primary-color: #F72585;
+  --secondary-color: #c4c4c4;
+  --danger-color: #f44336;
+  --success-color: #4caf50;
+  --warning-color: #F2BB05;
+
+  --text-hover: #0e0c0e;
+  --default-hover: #0f2a2e;
+  --primary-hover: #dd0868;
+  --secondary-hover: #a8b0bd;
+  --danger-hover: #c41508;
+  --success-hover: #357937;
+  --warning-hover: #b38f00;
+  --active-hover: #0047b3;
+
+  --off-white: #f6f9fc;
+  --active-color: #0065ff;
+
+  --dark-color: #221d23;
+  --light-color: #F7F7FF;
+
+  --shadow-color: #00000059;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-1,
+.text-2,
+.text-3,
+.text-4,
+.text-5 {
+  font-family: "Roboto Slab", serif;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto Slab", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+html {
+  font-size: 16px;
+}
