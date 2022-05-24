@@ -57,3 +57,8 @@ code {
 html {
   font-size: 16px;
 }
+@media screen and (max-width: 480px) {
+  html{
+    font-size: 13px;
+  }
+}

@@ -1,25 +1,109 @@
 .landing_page_wrapper {
   display: grid;
-  height: 100vh;
-  width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.logo_container h1 span {
+  color: var(--primary-color);
+}
+.logo_container small {
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-transform: uppercase;
 }
 .hero_text_section {
   padding: var(--scale-lg);
 }
 .hero_img_section {
-  padding: var(--scale-lg);
   align-self: center;
+  padding: var(--scale-lg);
 }
-
+.hero_description_container {
+  margin-top: var(--scale-xl);
+}
+.hero_description_container p {
+  padding: var(--scale-lg) 0;
+}
+.hero_description_container p span:nth-child(1) {
+  color: var(--secondary-color);
+  font-size: var(--scale-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.hero_description_container p span:nth-child(2) {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.hero_btns_container {
+  margin-top: var(--scale-xxl);
+}
+.hero_btns_container button {
+  display: block;
+  margin: var(--scale-lg) 0;
+  width: 90%;
+}
+.hero_btn {
+  background-color: var(--primary-color);
+  color: var(--off-white);
+  font-size: var(--scale-lg);
+  padding: var(--scale-md) var(--scale-lg);
+}
+.login_page_btn {
+  color: var(--secondary-color);
+  padding: 0;
+}
+.login_page_btn:hover {
+  color: var(--default-color);
+  transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width: 850px) {
+  .logo_container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .landing_page_wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  }
+  .hero_img_section {
+    margin: auto;
+    order: 1;
+    padding: var(--scale-md);
+  }
+  .hero_text_section {
+    max-width: 100%;
+    order: 2;
+    padding: var(--scale-md);
+  }
+  .hero_btns_container button {
+    margin: var(--scale-lg) auto;
+    width: 99%;
+  }
+}
 @media screen and (max-width: 480px) {
+  .landing_page_wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  .logo_container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
   .landing_page_wrapper {
     padding: var(--scale-sm);
   }
   .hero_img_section {
+    margin: auto;
+    order: 1;
     padding: var(--scale-sm);
   }
   .hero_text_section {
+    max-width: 100%;
+    order: 2;
     padding: var(--scale-sm);
+  }
+  .hero_btns_container button {
+    margin: var(--scale-lg) auto;
+    width: 99%;
   }
 }
