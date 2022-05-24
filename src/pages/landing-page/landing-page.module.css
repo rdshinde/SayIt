@@ -1,6 +1,6 @@
 .landing_page_wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
 
 .logo_container h1 span {
@@ -56,7 +56,7 @@
   color: var(--default-color);
   transition: all 0.3s ease-in-out;
 }
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 999px) {
   .logo_container {
     position: fixed;
     top: 0;
