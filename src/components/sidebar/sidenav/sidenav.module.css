@@ -1,13 +1,13 @@
 .sidenav_wrapper {
   padding: var(--scale-md);
-  max-width: 25%;
+  max-width: 100%;
 }
 .sidenav_link {
   display: grid;
   grid-template-columns: 0.25fr 0.75fr;
   font-size: 20px;
   padding: var(--scale-md);
-  margin: var(--scale-md) var(--scale-md);
+  margin: var(--scale-md);
 }
 .sidenav_link:hover {
   background-color: var(--secondary-color);

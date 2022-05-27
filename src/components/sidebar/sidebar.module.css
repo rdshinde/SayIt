@@ -1,0 +1,30 @@
+.createpost_cta_container {
+  margin: var(--scale-md);
+  padding: var(--scale-md);
+  width: 90%;
+}
+.createpost_cta {
+  background-color: var(--primary-color);
+  color: var(--off-white);
+  font-size: 20px;
+  text-transform: none;
+  width: 90%;
+}
+.user_info_container {
+  margin: var(--scale-md);
+  margin-top: auto;
+}
+.logout_wrapper {
+  display: grid;
+  grid-template-columns: 0.2fr auto 0.1fr;
+}
+.logout_wrapper div span {
+  display: block;
+}
+
+.sidebar_container {
+  border: 1px solid red;
+  display: grid;
+  grid-template-rows: auto 1fr 3.5fr;
+  max-width: 20%;
+}
