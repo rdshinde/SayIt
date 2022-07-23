@@ -1,3 +1,9 @@
+.sidebar_container {
+  display: grid;
+  grid-template-rows: auto 1fr 3.5fr;
+  max-width: 22.5%;
+}
+
 .createpost_cta_container {
   margin: var(--scale-md);
   padding: var(--scale-md);
@@ -9,6 +15,7 @@
   font-size: 20px;
   text-transform: none;
   width: 90%;
+  padding: var(--scale-md) 0;
 }
 .user_info_container {
   margin: var(--scale-md);
@@ -20,11 +27,4 @@
 }
 .logout_wrapper div span {
   display: block;
-}
-
-.sidebar_container {
-  border: 1px solid red;
-  display: grid;
-  grid-template-rows: auto 1fr 3.5fr;
-  max-width: 20%;
 }

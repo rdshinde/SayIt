@@ -12,5 +12,9 @@
 .sidenav_link:hover {
   background-color: var(--secondary-color);
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out 0.1s;
+  color: var(--primary-color);
+}
+.sidenav_link > span {
+  font-weight: 500;
 }
