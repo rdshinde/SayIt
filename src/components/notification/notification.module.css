@@ -1,0 +1,50 @@
+.notification_wrapper {
+  display: grid;
+  grid-template-columns: 0.1fr 0.9fr;
+  max-width: fit-content;
+  background-color: var(--white);
+  padding: var(--scale-md);
+}
+.notification_icon{
+    color: var(--primary-color);
+}
+.user_info {
+  display: grid;
+  grid-template-columns: 0.1fr 0.9fr;
+  gap: var(--scale-sm);
+  margin-bottom: var(--scale-md);
+}
+.user_name {
+  display: inline-block;
+  margin-right: var(--scale-md);
+}
+.user_username {
+  margin-right: var(--scale-md);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+.timestamp {
+  font-size: 14px;
+  color: var(--secondary-hover);
+}
+.user_img img {
+  width: 3rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  height: auto;
+  border-radius: 50%;
+}
+.message {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-top: var(--scale-sm);
+  color: var(--secondary-hover);
+}
+.post_container {
+  border: 0.5px solid var(--secondary-hover);
+  max-height: 25vh;
+  overflow: hidden;
+}
+.post_container >*{
+    max-width: 100%;
+} 

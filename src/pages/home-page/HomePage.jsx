@@ -4,6 +4,7 @@ import {
   DetailedPost,
   EditProfile,
   Header,
+  Notification,
   Post,
   PostInput,
   SearchFollowAside,
@@ -34,6 +35,9 @@ export const HomePage = () => {
         <CommentInput />
 
         <Comment />
+        <br />
+        <br />
+        <Notification />
       </div>
     </div>
   );
