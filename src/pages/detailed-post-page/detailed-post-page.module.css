@@ -1,0 +1,7 @@
+.title {
+  margin: var(--scale-md) auto;
+  position: sticky;
+  top:81px;
+  background-color: var(--default-bg-color);
+  z-index: 5;
+}

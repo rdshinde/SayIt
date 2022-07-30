@@ -10,6 +10,7 @@
   top: 0;
   background-color: var(--default-bg-color);
   padding: var(--scale-md);
+  z-index: 5;
 }
 .back_icon {
   position: relative;
@@ -25,6 +26,7 @@
   grid-template-columns: 0.1fr 0.8fr 0.1fr;
   align-items: center;
   margin: var(--scale-lg) auto;
+  margin-top: var(--scale-sm);
 }
 .user_img img {
   width: 3rem;

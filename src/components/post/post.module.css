@@ -1,6 +1,7 @@
 .post_wrapper {
   background-color: var(--white);
   padding: var(--scale-md);
+  margin: var(--scale-md) auto;
 }
 .post_row1 {
   display: grid;
@@ -67,7 +68,7 @@
   letter-spacing: normal;
   line-height: 2.5ch;
   color: var(--default-text-color);
-  max-width: 45ch;
+  max-width: 58ch;
 }
 .post_more_info_btn {
   justify-self: end;
@@ -80,6 +81,11 @@
   display: grid;
   grid-template-columns: 0.4fr 0.4fr 0.4fr 0.1fr;
   align-items: center;
+}
+.post_more_info_btn *:hover,
+.post_cta_btns *:hover {
+  color: var(--primary-color);
+  transition: all 0.4s ease-in 0.1s;
 }
 .post_cta_btns span:nth-child(4) {
   justify-self: center;

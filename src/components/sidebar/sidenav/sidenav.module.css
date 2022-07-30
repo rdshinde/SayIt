@@ -9,11 +9,18 @@
   padding: var(--scale-md);
   margin: 0 var(--scale-md) var(--scale-md) var(--scale-md);
 }
+.sidenav_active_link {
+  color: var(--primary-color);
+}
+.sidenav_wrapper .sidenav_active_link > span {
+  font-weight: 700;
+}
 .sidenav_link:hover {
   background-color: var(--secondary-color);
   cursor: pointer;
   transition: all 0.4s ease-in-out 0.1s;
   color: var(--primary-color);
+  text-decoration: none;
 }
 .sidenav_link > span {
   font-weight: 500;

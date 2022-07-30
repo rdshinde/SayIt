@@ -75,6 +75,11 @@
 .comment_more_info_btn * {
   color: var(--secondary-color);
 }
+.comment_more_info_btn *:hover,
+.comment_cta_btns *:hover {
+  color: var(--primary-color);
+  transition: all 0.4s ease-in 0.1s;
+}
 .comment_cta_btns {
   margin-top: var(--scale-lg);
   display: grid;

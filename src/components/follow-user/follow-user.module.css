@@ -13,6 +13,7 @@
   color: var(--primary-color);
   font-size: 15px;
   text-transform: none;
+  justify-self: end;
 }
 .user_username {
   color: var(--primary-color);
