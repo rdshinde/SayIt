@@ -1,7 +1,7 @@
 .sidebar_container {
   display: grid;
-  grid-template-rows: auto 1fr 3.5fr;
-  max-width: 22.5%;
+  grid-template-rows: auto 1fr 1.5fr;
+  /* max-width: 22.5%; */
 }
 
 .createpost_cta_container {

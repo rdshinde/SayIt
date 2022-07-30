@@ -7,7 +7,7 @@
   grid-template-columns: 0.25fr 0.75fr;
   font-size: 20px;
   padding: var(--scale-md);
-  margin: var(--scale-md);
+  margin: 0 var(--scale-md) var(--scale-md) var(--scale-md);
 }
 .sidenav_link:hover {
   background-color: var(--secondary-color);

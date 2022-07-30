@@ -11,11 +11,12 @@ import {
   Sidebar,
   UserProfile,
 } from "../../components";
+import { PageLayout } from "../page-layout/PageLayout";
 import styles from "./home-page.module.css";
 export const HomePage = () => {
   return (
     <div>
-      <Header />
+      {/* <Header />
       <Sidebar />
       <div style={{ margin: "10rem", width: "100%" }}>
         <PostInput />
@@ -38,7 +39,15 @@ export const HomePage = () => {
         <br />
         <br />
         <Notification />
-      </div>
+      </div> */}
+      <PageLayout>
+        {/* <PostInput />
+
+        <Post/>
+        <CommentInput/>
+        <Comment/> */}
+        <UserProfile />
+      </PageLayout>
     </div>
   );
 };

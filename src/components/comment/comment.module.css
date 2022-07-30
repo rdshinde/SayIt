@@ -1,8 +1,7 @@
 .comment_wrapper {
   background-color: var(--white);
-  max-width: 40%;
   padding: var(--scale-md);
-  /* width: 800px; */
+  margin: var(--scale-md) auto;
 }
 .comment_row1 {
   display: grid;

@@ -22,7 +22,7 @@ export const CommentInput = () => {
             <textarea
               name="comment-text"
               id="comment-text"
-              cols="45"
+              cols="55"
               rows="3"
               placeholder="Write something Here..."
             ></textarea>
@@ -34,7 +34,7 @@ export const CommentInput = () => {
         <div></div>
         <div className={styles.comment_input_btns}>
           <div className={styles.media_btns}>
-            <button className={`btn`}>
+            <button className={`btn`} style={{ paddingLeft: 0 }}>
               <GrGallery size={18} title="Insert Image" />
             </button>
             <button className={`btn`}>

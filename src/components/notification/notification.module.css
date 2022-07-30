@@ -1,9 +1,9 @@
 .notification_wrapper {
   display: grid;
   grid-template-columns: 0.1fr 0.9fr;
-  max-width: fit-content;
   background-color: var(--white);
   padding: var(--scale-md);
+  margin: var(--scale-md) auto;
 }
 .notification_icon{
     color: var(--primary-color);

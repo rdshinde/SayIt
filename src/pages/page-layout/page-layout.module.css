@@ -1,0 +1,42 @@
+.page_wrapper {
+  width: 100vw;
+  height:max-content;
+  display: grid;
+  grid-template-columns: 0.22fr 0.5fr 0.28fr;
+  grid-template-rows: 0.1fr 1fr;
+  grid-template-areas:
+    "header header header"
+    "sidebar main aside";
+}
+.header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.sidebar {
+  grid-area: sidebar;
+  overflow: hidden;
+}
+.sidebar >aside{
+    position: fixed;
+    left: 0;
+    width: 22%;
+}
+.main_content {
+  grid-area: main;
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.main_content::-webkit-scrollbar {
+  display: none;
+}
+.aside {
+  grid-area: aside;
+  padding-right: var(--scale-md);
+}
+.aside>aside{
+    position: fixed;
+    width: 25%;
+}

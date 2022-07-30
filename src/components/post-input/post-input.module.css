@@ -1,17 +1,20 @@
 .post_input_wrapper {
   background-color: var(--white);
-  max-width: 40%;
+  /* max-width: 40%; */
   padding: var(--scale-md);
+  margin-top: var(--scale-md);
+  margin-bottom: var(--scale-md);
 }
 .post_input_row1 {
   display: grid;
-  grid-template-columns: 0.15fr 0.85fr;
-  justify-content: space-between;
+  grid-template-columns: 0.1fr 0.9fr;
+  /* justify-content: space-between; */
+  /* gap: var(--scale-xl); */
 }
 .post_input_row2 {
   display: grid;
   grid-template-columns: 0.1fr 0.9fr;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 .user_avatar {
   border-radius: 50%;
@@ -75,6 +78,6 @@
   background-color: var(--primary-color);
   color: var(--off-white);
   padding: calc(var(--scale-sm) + 5px);
-  width: 100%;
+  width: 92%;
   font-size: var(--scale-md);
 }

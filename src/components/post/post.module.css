@@ -1,14 +1,10 @@
 .post_wrapper {
   background-color: var(--white);
-  max-width: fit-content;
   padding: var(--scale-md);
-  /* width: 800px; */
 }
 .post_row1 {
   display: grid;
   grid-template-columns: 0.03fr 0.97fr;
-  /* gap: var(--scale-md); */
-  /* width: 107%; */
   justify-content: space-between;
 }
 .user_avatar {
@@ -50,6 +46,9 @@
   margin: var(--scale-md) auto;
   max-height: 50vh;
   overflow-y: auto;
+}
+.post_content::-webkit-scrollbar {
+  display: none;
 }
 .post_image_container > img {
   width: 100%;

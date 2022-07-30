@@ -1,7 +1,15 @@
 .details_wrapper {
-  padding: var(--scale-md);
-  max-width: 40vw;
+  max-width: fit-content;
   background-color: var(--white);
+}
+.post {
+  padding: var(--scale-md);
+}
+.back_btn {
+  position: sticky;
+  top: 0;
+  background-color: var(--default-bg-color);
+  padding: var(--scale-md);
 }
 .back_icon {
   position: relative;
