@@ -1,0 +1,94 @@
+.comment_input_wrapper {
+  background-color: var(--white);
+  max-width: 40%;
+  padding: var(--scale-md);
+}
+.comment_input_row1 {
+  display: grid;
+  grid-template-columns: 0.15fr 0.85fr;
+  justify-content: space-between;
+}
+.comment_input_row2 {
+  display: grid;
+  grid-template-columns: 0.1fr 0.9fr;
+  justify-content: space-between;
+}
+.user_avatar {
+  border-radius: 50%;
+  max-width: fit-content;
+}
+.comment_text_input {
+  padding: auto var(--scale-md);
+}
+.comment_text_input * {
+  font-size: var(--scale-md);
+  font-weight: 600;
+  font-family: "Roboto Slab", serif;
+  color: var(--default-text-color);
+}
+.comment_text_input > div > textarea {
+  border: 1px solid transparent;
+  background-color: var(--default-bg-color);
+  border: none;
+  overflow: auto;
+  outline: 1px solid transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none;
+  padding: var(--scale-md);
+  caret-color: var(--primary-color);
+}
+.comment_text_input > textarea::placeholder {
+  color: var(--secondary-color);
+}
+.characters_count {
+  background-color: var(--secondary-color);
+  color: var(--off-white);
+  max-width: fit-content;
+  border-radius: 50%;
+  padding: var(--scale-sm);
+  width: var(--scale-xl);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  right: 3%;
+  bottom: var(--scale-md);
+  cursor: default;
+}
+.textarea_wrapper {
+  position: relative;
+  max-width: fit-content;
+}
+.comment_input_btns {
+  display: grid;
+  grid-template-columns: 0.7fr 0.3fr;
+  justify-content: space-between;
+}
+.comment_input_btns div {
+  padding: var(--scale-sm) 0;
+}
+.comment_cta_btn {
+  text-transform: none;
+  background-color: var(--primary-color);
+  color: var(--off-white);
+  padding: calc(var(--scale-sm) + 5px);
+  width: 100%;
+  font-size: var(--scale-md);
+}
+.reply_to_text {
+  margin-bottom: var(--scale-md);
+  font-weight: 500;
+  color: var(--secondary-color);
+}
+.reply_to {
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 600;
+}
+.user_name {
+  margin-bottom: var(--scale-sm);
+  font-weight: 500;
+  cursor: pointer;
+}

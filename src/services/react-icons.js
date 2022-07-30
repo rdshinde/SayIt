@@ -17,3 +17,6 @@ export {
   BsBookmark,
 } from "react-icons/bs";
 export { GrGallery } from "react-icons/gr";
+export { CgDetailsMore } from "react-icons/cg";
+export { MdAddAPhoto } from "react-icons/md";
+export { GrClose } from "react-icons/gr";
