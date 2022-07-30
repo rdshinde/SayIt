@@ -1,0 +1,95 @@
+.details_wrapper {
+  padding: var(--scale-md);
+  max-width: 40vw;
+  background-color: var(--white);
+}
+.back_icon {
+  position: relative;
+  top: 0.3rem;
+  margin-right: 1rem;
+}
+.post_text {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.user_details {
+  display: grid;
+  grid-template-columns: 0.1fr 0.8fr 0.1fr;
+  align-items: center;
+  margin: var(--scale-lg) auto;
+}
+.user_img img {
+  width: 3rem;
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+.user_username {
+  color: var(--primary-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+.more_info_btn {
+  justify-self: end;
+  color: var(--secondary-color);
+}
+.post_text_content {
+  font-size: var(--scale-md);
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 2.5ch;
+  color: var(--default-text-color);
+  margin: var(--scale-md) auto;
+  margin-top: 0;
+}
+.post_content {
+  margin: var(--scale-md) auto;
+  overflow-y: auto;
+}
+.post_image_container > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  cursor: pointer;
+}
+.post_timestamp {
+  margin: var(--scale-md) auto;
+  padding-bottom: var(--scale-md);
+  border-bottom: 0.5px solid var(--secondary-color);
+}
+.post_timestamp small {
+  color: var(--secondary-hover);
+  font-weight: 400;
+  font-size: 12px;
+  cursor: default;
+}
+.post_stats {
+  font-size: var(--scale-md);
+  color: var(--secondary-hover);
+  padding-bottom: var(--scale-md);
+  border-bottom: 0.5px solid var(--secondary-color);
+  display: grid;
+  grid-template-columns: 0.25fr 0.3fr 0.5fr;
+  align-items: center;
+}
+.post_stats div > span {
+  margin-right: var(--scale-sm);
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.post_stats .shares {
+  justify-self: end;
+}
+.post_cta_btns {
+  margin-top: var(--scale-md);
+  display: grid;
+  grid-template-columns: 0.4fr 0.4fr 0.4fr 0.1fr;
+  align-items: center;
+  padding-bottom: var(--scale-md);
+  border-bottom: 0.5px solid var(--secondary-color);
+}
+.post_cta_btns span:nth-child(4) {
+  justify-self: center;
+}
+.post_cta_btns span * {
+  color: var(--secondary-hover);
+}

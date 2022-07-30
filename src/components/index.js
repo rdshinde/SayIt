@@ -8,3 +8,4 @@ export { EditProfile } from "./edit-profile-modal/EditProfile";
 export { SearchFollowAside } from "./search-follow-aside/SearchFollowAside";
 export { FollowUser } from "./follow-user/FollowUser";
 export { UserProfile } from "./user-profile/UserProfile";
+export { DetailedPost } from "./detailed-post/DetailedPost";

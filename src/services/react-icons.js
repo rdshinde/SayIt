@@ -9,7 +9,7 @@ export {
   AiOutlineShareAlt,
   AiOutlineSearch,
 } from "react-icons/ai";
-export { IoMdRocket } from "react-icons/io";
+export { IoMdRocket, IoMdArrowBack } from "react-icons/io";
 export { CgProfile } from "react-icons/cg";
 export {
   BsBookmarksFill,

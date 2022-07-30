@@ -64,6 +64,7 @@ export const Post = () => {
             </span>
           </div>
         </section>
+        
       </div>
     </article>
     
