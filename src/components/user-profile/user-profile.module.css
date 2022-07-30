@@ -1,0 +1,59 @@
+.user_profile_wrapper {
+  width: 40vw;
+  padding: var(--scale-md);
+  text-align: center;
+}
+.profile_img {
+  text-align: center;
+}
+.profile_img img {
+  width: 7rem;
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+.user_info {
+  margin: var(--scale-md) auto;
+}
+.user_name {
+  font-size: var(--scale-lg);
+  font-weight: 600;
+  cursor: default;
+}
+.user_username {
+  font-size: var(--scale-md);
+  color: var(--secondary-hover);
+  font-weight: 600;
+  padding: var(--scale-md) 0;
+  cursor: default;
+}
+.edit_profile_btn {
+  text-transform: none;
+  margin-bottom: var(--scale-md);
+  transition: all 0.3s ease-in 0.1s;
+}
+.user_bio {
+  padding: var(--scale-md);
+  padding-top: 0;
+  font-weight: 600;
+  line-height: 2.5ch;
+}
+.user_website {
+  color: var(--primary-color);
+  margin-bottom: var(--scale-md);
+}
+.user_stats {
+  display: grid;
+  width: 80%;
+  grid-template-columns: repeat(3, 1fr);
+  margin: var(--scale-md) auto;
+  padding: var(--scale-md);
+  background-color: var(--white);
+}
+.stat_wrapper {
+  font-size: 20px;
+  cursor: default;
+}
+.stat_wrapper p:nth-child(1) {
+  font-weight: 700;
+  padding-bottom: 10px;
+}

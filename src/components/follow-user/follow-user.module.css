@@ -1,0 +1,25 @@
+.user_info {
+  display: grid;
+  grid-template-columns: 0.2fr 0.5fr 0.3fr;
+  align-items: center;
+  margin: var(--scale-md) auto;
+  margin-bottom: var(--scale-lg);
+}
+.user_profile img {
+  width: 3rem;
+  border-radius: 50%;
+}
+.follow_btn {
+  color: var(--primary-color);
+  font-size: 15px;
+  text-transform: none;
+}
+.user_username {
+  color: var(--primary-color);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: var(--scale-md);
+}
+.user_name {
+  cursor: pointer;
+}

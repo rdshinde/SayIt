@@ -5,3 +5,6 @@ export { Post } from "./post/Post";
 export { Comment } from "./comment/Comment";
 export { CommentInput } from "./comment-input/CommentInput";
 export { EditProfile } from "./edit-profile-modal/EditProfile";
+export { SearchFollowAside } from "./search-follow-aside/SearchFollowAside";
+export { FollowUser } from "./follow-user/FollowUser";
+export { UserProfile } from "./user-profile/UserProfile";

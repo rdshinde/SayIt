@@ -5,7 +5,9 @@ import {
   Header,
   Post,
   PostInput,
+  SearchFollowAside,
   Sidebar,
+  UserProfile,
 } from "../../components";
 import styles from "./home-page.module.css";
 export const HomePage = () => {
@@ -22,6 +24,10 @@ export const HomePage = () => {
         <Comment />
         <br />
         <EditProfile />
+        <br />
+        <SearchFollowAside />
+        <br />
+        <UserProfile />
       </div>
     </div>
   );
