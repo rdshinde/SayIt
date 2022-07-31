@@ -1,0 +1,79 @@
+.input_label_container {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--secondary-hover);
+}
+.label_icon {
+  position: relative;
+  top: 2px;
+}
+.input_group {
+  margin: var(--scale-md) auto;
+}
+.show_password {
+  position: absolute;
+  right: var(--scale-md);
+  top: 25px;
+  color: var(--secondary-hover);
+}
+.input_container {
+  margin-top: var(--scale-sm);
+  position: relative;
+}
+.input_container input {
+  outline: 1px solid transparent;
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--secondary-hover);
+  background-color: transparent;
+  font-size: 18px;
+}
+.input_container input:focus {
+  caret-color: var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
+  box-shadow: 0 10px 10px -10px var(--primary-color);
+  color: var(--primary-color);
+}
+.input_container input[type="text"] {
+  width: 95%;
+  font-size: 18px;
+  padding: var(--scale-md);
+}
+.form_footer {
+  text-align: center;
+}
+.form_footer button {
+  margin: auto var(--scale-md);
+  transition: all 0.3s ease-in 0.1s;
+  text-transform: none;
+}
+.submit_btn {
+  font-size: 20px;
+  padding: 20px auto;
+}
+.other_links {
+  margin: var(--scale-md) auto;
+  font-weight: 500;
+}
+.other_links span {
+  font-weight: 600;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.other_links span:hover {
+  text-decoration: underline;
+}
+
+.error::after {
+  content: attr(error-message);
+  padding-left: var(--scale-md);
+  color: var(--danger-color);
+  font-weight: 600;
+  font-size: 14px;
+}
+.success::after {
+  content: attr(success-message);
+  padding-left: var(--scale-md);
+  color: var(--success-color);
+  font-weight: 600;
+  font-size: 14px;
+}

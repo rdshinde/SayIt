@@ -1,12 +1,20 @@
 .page_wrapper {
   width: 100vw;
-  height:max-content;
+  height: max-content;
   display: grid;
   grid-template-columns: 0.22fr 0.5fr 0.28fr;
   grid-template-rows: 0.1fr 1fr;
   grid-template-areas:
     "header header header"
     "sidebar main aside";
+}
+.page_backdrop::after {
+  content: "";
+  z-index: 10;
+  inset: 0;
+  position: fixed;
+  background-color: var(--secondary-color);
+  opacity: 0.7;
 }
 .header {
   grid-area: header;
@@ -18,10 +26,10 @@
   grid-area: sidebar;
   overflow: hidden;
 }
-.sidebar >aside{
-    position: fixed;
-    left: 0;
-    width: 22%;
+.sidebar > aside {
+  position: fixed;
+  left: 0;
+  width: 22%;
 }
 .main_content {
   grid-area: main;
@@ -36,7 +44,7 @@
   grid-area: aside;
   padding-right: var(--scale-md);
 }
-.aside>aside{
-    position: fixed;
-    width: 25%;
+.aside > aside {
+  position: fixed;
+  width: 25%;
 }

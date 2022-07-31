@@ -1,0 +1,38 @@
+.modal_wrapper {
+  width: 65vw;
+  background-color: var(--white);
+  padding: var(--scale-md);
+  position: fixed;
+  z-index: 12;
+  top: 50%;
+  left: 40%;
+  transform: translate(-30%, -50%);
+  box-shadow: 1px 1px 3px 1px var(--shadow-color);
+}
+.buttons {
+  background-color: var(--white);
+  position: absolute;
+  top: -10%;
+  left: 23%;
+  width: 50%;
+  box-shadow: 1px 1px 3px 1px var(--shadow-color);
+  padding: var(--scale-md);
+}
+.buttons button {
+  margin: auto var(--scale-lg);
+  font-size: var(--scale-lg);
+  text-transform: none;
+  color: var(--secondary-hover);
+  
+}
+.buttons .active {
+  border-bottom: 3px solid var(--primary-color);
+  color: var(--primary-color);
+}
+.forms_container {
+  padding-top: var(--scale-xl);
+}
+.signup_icon {
+  position: relative;
+  top: 5px;
+}

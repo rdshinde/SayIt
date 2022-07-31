@@ -12,3 +12,7 @@ export { DetailedPost } from "./detailed-post/DetailedPost";
 export { Notification } from "./notification/Notification";
 export { FilterModal } from "./filter-modal/FilterModal";
 export { PostMoreActionModal } from "./post-more-action-modal/PostMoreActionModal";
+export { EditPostModal } from "./edit-post-modal/EditPostModal";
+export { LoginForm } from "./auth-forms/LoginForm";
+export { SignupForm } from "./auth-forms/SignupForm";
+export { AuthFormModal } from "./auth-form-modal/AuthFormModal";

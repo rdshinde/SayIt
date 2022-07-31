@@ -2,6 +2,12 @@
   width: 40vw;
   background-color: var(--white);
   padding: var(--scale-md);
+  position: fixed;
+  z-index: 12;
+  top: 40%;
+  left: 40%;
+  transform: translate(-30%, -50%);
+  box-shadow: 1px 1px 3px 1px var(--shadow-color);
 }
 .modal_row1 {
   display: grid;

@@ -1,10 +1,15 @@
 import styles from "./page-layout.module.css";
 import React from "react";
-import { FollowUser, Header, SearchFollowAside, Sidebar } from "../../components";
-
+import {
+  FollowUser,
+  Header,
+  SearchFollowAside,
+  Sidebar,
+} from "../../components";
+/*${styles.page_backdrop}*/
 export const PageLayout = ({ children }) => {
   return (
-    <div className={styles.page_wrapper}>
+    <div className={`${styles.page_wrapper}`}>
       <div className={styles.header}>
         <Header />
       </div>
