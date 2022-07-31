@@ -10,3 +10,5 @@ export { FollowUser } from "./follow-user/FollowUser";
 export { UserProfile } from "./user-profile/UserProfile";
 export { DetailedPost } from "./detailed-post/DetailedPost";
 export { Notification } from "./notification/Notification";
+export { FilterModal } from "./filter-modal/FilterModal";
+export { PostMoreActionModal } from "./post-more-action-modal/PostMoreActionModal";

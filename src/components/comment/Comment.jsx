@@ -1,5 +1,5 @@
 import styles from "./comment.module.css";
-import React from "react";
+import React, { useState } from "react";
 import ReactJdenticon from "react-jdenticon";
 import {
   BsThreeDotsVertical,
@@ -11,7 +11,12 @@ import {
   AiOutlineShareAlt,
   BsBookmarksFill,
 } from "../../services";
+import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
 export const Comment = () => {
+  const [moreActionModalState, setMoreActionModalState] = useState(false);
+  const moreActionModalHandler = () => {
+    setMoreActionModalState((prev) => !prev);
+  };
   return (
     <article className={styles.comment_wrapper}>
       <div className={styles.comment_row1}>
@@ -24,7 +29,8 @@ export const Comment = () => {
               <div>
                 <h3>Rishikesh Shinde</h3>
                 <span className={styles.user_username}>
-                  replying <span className={`text-primary bold-lg`}> @rdshinde</span>
+                  replying{" "}
+                  <span className={`text-primary bold-lg`}> @rdshinde</span>
                 </span>
               </div>
               <div>
@@ -32,8 +38,17 @@ export const Comment = () => {
                 <span className={styles.timestamp}>1 min ago</span>
               </div>
             </div>
-            <div className={styles.comment_more_info_btn}>
+            <div
+              className={styles.comment_more_info_btn}
+              onClick={moreActionModalHandler}
+            >
               <BsThreeDotsVertical size={20} title={`More Info`} />
+              <PostMoreActionModal
+                data={{
+                  moreActionModalHandler: moreActionModalHandler,
+                  moreActionModalState: moreActionModalState,
+                }}
+              />
             </div>
           </div>
           <div className={styles.comment_content}>

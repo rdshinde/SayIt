@@ -1,5 +1,5 @@
 import styles from "./post.module.css";
-import React from "react";
+import React, { useState } from "react";
 import ReactJdenticon from "react-jdenticon";
 import {
   BsThreeDotsVertical,
@@ -9,8 +9,15 @@ import {
   AiOutlineShareAlt,
   BsBookmark,
   BsBookmarksFill,
+  AiFillEdit,
+  MdDelete,
 } from "../../services";
+import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
 export const Post = () => {
+  const [moreActionModalState, setMoreActionModalState] = useState(false);
+  const moreActionModalHandler = () => {
+    setMoreActionModalState((prev) => !prev);
+  };
   return (
     <article className={styles.post_wrapper}>
       <div className={styles.post_row1}>
@@ -29,8 +36,17 @@ export const Post = () => {
                 <span className={styles.timestamp}>1 min ago</span>
               </div>
             </div>
-            <div className={styles.post_more_info_btn}>
+            <div
+              className={styles.post_more_info_btn}
+              onClick={moreActionModalHandler}
+            >
               <BsThreeDotsVertical size={20} title={`More Info`} />
+              <PostMoreActionModal
+                data={{
+                  moreActionModalHandler: moreActionModalHandler,
+                  moreActionModalState: moreActionModalState,
+                }}
+              />
             </div>
           </div>
           <div className={styles.post_content}>
@@ -64,9 +80,7 @@ export const Post = () => {
             </span>
           </div>
         </section>
-        
       </div>
     </article>
-    
   );
 };

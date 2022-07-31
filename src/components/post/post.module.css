@@ -72,6 +72,7 @@
 }
 .post_more_info_btn {
   justify-self: end;
+  position: relative;
 }
 .post_more_info_btn * {
   color: var(--secondary-color);

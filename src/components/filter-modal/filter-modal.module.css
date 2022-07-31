@@ -1,0 +1,50 @@
+.filter_modal_wrapper {
+  background-color: var(--white);
+  border: 1px solid var(--secondary-color);
+  box-shadow: 1px 1px 2px 1px var(--shadow-color);
+  margin-top: var(--scale-md);
+  min-width: 15rem;
+  padding: var(--scale-md);
+  position: absolute;
+  right: var(--scale-md);
+  top: 60%;
+  transform-origin: 0 0;
+  transform: scaleY(0);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s;
+  z-index: 6;
+}
+.show_modal {
+  transform: scale(1);
+}
+.clear_filters_btn {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-content: end;
+}
+.clear_filters_btn button {
+  justify-self: end;
+  padding: 0;
+  color: var(--primary-color);
+  text-transform: none;
+}
+.filter_name {
+  margin: var(--scale-md) auto;
+  font-size: var(--scale-md);
+  font-weight: 700;
+  color: var(--secondary-hover);
+}
+p.filter_name:nth-child(1) {
+  margin-top: 0;
+}
+.input_group {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  align-items: center;
+  margin-bottom: var(--scale-sm);
+}
+.input_group input,
+.input_group label {
+  justify-self: start;
+  font-weight: 500;
+}

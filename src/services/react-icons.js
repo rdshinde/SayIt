@@ -8,6 +8,7 @@ export {
   AiOutlineComment,
   AiOutlineShareAlt,
   AiOutlineSearch,
+  AiFillEdit,
 } from "react-icons/ai";
 export { IoMdRocket, IoMdArrowBack } from "react-icons/io";
 export { CgProfile } from "react-icons/cg";
@@ -19,5 +20,6 @@ export {
 } from "react-icons/bs";
 export { GrGallery } from "react-icons/gr";
 export { CgDetailsMore } from "react-icons/cg";
-export { MdAddAPhoto } from "react-icons/md";
+export { MdAddAPhoto, MdDelete } from "react-icons/md";
 export { GrClose } from "react-icons/gr";
+export { FaFilter } from "react-icons/fa";

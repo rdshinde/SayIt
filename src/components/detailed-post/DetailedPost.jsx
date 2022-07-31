@@ -1,5 +1,5 @@
 import styles from "./detailed-post.module.css";
-import React from "react";
+import React, { useState } from "react";
 import {
   IoMdArrowBack,
   BsThreeDotsVertical,
@@ -8,7 +8,12 @@ import {
   BsBookmark,
   AiOutlineShareAlt,
 } from "../../services";
+import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
 export const DetailedPost = () => {
+  const [moreActionModalState, setMoreActionModalState] = useState(false);
+  const moreActionModalHandler = () => [
+    setMoreActionModalState((prev) => !prev),
+  ];
   return (
     <section className={styles.details_wrapper}>
       <div className={styles.back_btn}>
@@ -29,8 +34,17 @@ export const DetailedPost = () => {
             <h4 className={styles.user_name}>Rishikesh Shinde</h4>
             <p className={styles.user_username}>@rdshinde</p>
           </div>
-          <div className={styles.more_info_btn}>
+          <div
+            className={styles.more_info_btn}
+            onClick={moreActionModalHandler}
+          >
             <BsThreeDotsVertical size={20} title={`More Info`} />
+            <PostMoreActionModal
+              data={{
+                moreActionModalHandler: moreActionModalHandler,
+                moreActionModalState: moreActionModalState,
+              }}
+            />
           </div>
         </div>
         <article className={styles.post_content}>
@@ -82,3 +96,4 @@ export const DetailedPost = () => {
     </section>
   );
 };
+      

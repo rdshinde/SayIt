@@ -41,6 +41,7 @@
 .more_info_btn {
   justify-self: end;
   color: var(--secondary-color);
+  position: relative;
 }
 .post_text_content {
   font-size: var(--scale-md);

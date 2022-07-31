@@ -6,8 +6,6 @@
 .comment_row1 {
   display: grid;
   grid-template-columns: 0.03fr 0.97fr;
-  /* gap: var(--scale-md); */
-  /* width: 107%; */
   justify-content: space-between;
 }
 .user_avatar {
@@ -71,6 +69,7 @@
 }
 .comment_more_info_btn {
   justify-self: end;
+  position: relative;
 }
 .comment_more_info_btn * {
   color: var(--secondary-color);
