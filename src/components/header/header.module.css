@@ -1,0 +1,11 @@
+.header_wrapper {
+  padding: var(--scale-sm) calc(var(--scale-xl) + var(--scale-sm));
+  background-color: var(--white);
+  color: var(--primary-color);
+}
+.title_subsection {
+  color: var(--secondary-color);
+}
+.header_link:hover {
+  text-decoration: none;
+}

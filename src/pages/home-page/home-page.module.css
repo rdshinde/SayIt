@@ -1,0 +1,15 @@
+.title {
+  margin: var(--scale-md) auto;
+  display: grid;
+  grid-template-columns: 0.9fr 0.1fr;
+  align-items: center;
+  position: relative;
+}
+.filter_btn {
+  justify-self: end;
+  margin: auto var(--scale-sm);
+}
+.filter_btn *:hover {
+  color: var(--primary-color);
+  transition: all 0.3s ease-in 0.1s;
+}

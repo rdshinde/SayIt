@@ -1,0 +1,38 @@
+.more_actions_modal {
+  background-color: var(--white);
+  border: 1px solid var(--secondary-color);
+  box-shadow: 1px 1px 2px 1px var(--shadow-color);
+  margin-top: var(--scale-md);
+  min-width: 12rem;
+  padding: var(--scale-md);
+  position: absolute;
+  right: var(--scale-md);
+  top: 60%;
+  transform-origin: 0 0;
+  transform: scaleY(0);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s;
+  z-index: 5;
+}
+.show_modal {
+  transform: scale(1);
+}
+.delete_action {
+  margin: var(--scale-md) var(--scale-sm);
+}
+.edit_action {
+  margin: auto var(--scale-sm);
+}
+
+.edit_action span,
+.delete_action span {
+  color: var(--default-text-color);
+  font-weight: 600;
+  padding: 0 var(--scale-md);
+  cursor: pointer;
+}
+.edit_action > span:nth-child(1) * {
+  color: var(--default-color);
+}
+.delete_action > span:nth-child(1) * {
+  color: var(--danger-color);
+}

@@ -4,3 +4,6 @@ export { HomePage } from "./home-page/HomePage";
 export { LandingPage } from "./landing-page/LandingPage";
 export { NotificationPage } from "./notification-page/NotificationPage";
 export { ProfilePage } from "./profile-page/ProfilePage";
+export { PageLayout } from "./page-layout/PageLayout";
+export { DetailedPostPage } from "./detailed-post-page/DetailedPostPage";
+export { PageNotFound } from "./error-404-page/PageNotFound";

@@ -2,7 +2,7 @@
 
 :root {
   --default-text-color: #22181c;
-  --defalult-bg-color: #f7f7f7;
+  --default-bg-color: #f7f7f7;
   --default-color: #4062bb;
   --primary-color: #f72585;
   --secondary-color: #c4c4c4;
@@ -26,6 +26,8 @@
   --light-color: #f7f7ff;
 
   --shadow-color: #00000059;
+
+  --white: #fff;
 }
 h1,
 h2,
@@ -47,7 +49,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
-  background-color: var(--defalult-bg-color);
+  background-color: var(--default-bg-color);
+  color: var(--default-text-color);
 }
 
 code {
@@ -56,9 +59,11 @@ code {
 }
 html {
   font-size: 16px;
+  scroll-behavior: smooth;
 }
+
 @media screen and (max-width: 480px) {
-  html{
+  html {
     font-size: 13px;
   }
 }

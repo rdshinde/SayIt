@@ -1,0 +1,77 @@
+.modal_wrapper {
+  position: fixed;
+  z-index: 12;
+  top: 40%;
+  left: 40%;
+  transform: translate(-30%, -50%);
+  box-shadow: 1px 1px 3px 1px var(--shadow-color);
+  padding: var(--scale-md);
+  background-color: var(--white);
+}
+.modal_footer{
+    text-align: center;
+}
+.modal_footer button{
+    margin: auto var(--scale-md);
+}
+.user_username {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.post_user_info {
+  display: grid;
+  grid-template-columns: 0.1fr 0.9fr;
+  align-items: center;
+}
+.user_avatar img {
+  width: 3rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.post_text_input {
+  padding: auto var(--scale-md);
+  margin: var(--scale-md) auto;
+}
+.post_text_input * {
+  font-size: var(--scale-md);
+  font-weight: 600;
+  font-family: "Roboto Slab", serif;
+  color: var(--default-text-color);
+}
+.textarea_wrapper textarea {
+  border: 1px solid transparent;
+  background-color: var(--default-bg-color);
+  border: none;
+  overflow: auto;
+  outline: 1px solid transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none;
+  padding: var(--scale-md);
+  caret-color: var(--primary-color);
+}
+.post_text_input > textarea::placeholder {
+  color: var(--secondary-color);
+}
+
+.characters_count {
+  background-color: var(--secondary-color);
+  color: var(--off-white);
+  max-width: fit-content;
+  border-radius: 50%;
+  padding: var(--scale-sm);
+  width: var(--scale-xl);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  right: 3%;
+  bottom: var(--scale-md);
+  cursor: default;
+}
+.textarea_wrapper {
+  position: relative;
+  max-width: fit-content;
+}

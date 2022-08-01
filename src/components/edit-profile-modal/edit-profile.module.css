@@ -1,0 +1,74 @@
+.modal_wrapper {
+  width: 40vw;
+  background-color: var(--white);
+  padding: var(--scale-md);
+  position: fixed;
+  z-index: 12;
+  top: 40%;
+  left: 40%;
+  transform: translate(-30%, -50%);
+  box-shadow: 1px 1px 3px 1px var(--shadow-color);
+}
+.modal_row1 {
+  display: grid;
+  grid-template-columns: 0.99fr 0.01fr;
+}
+.modal_title {
+  display: inline-block;
+  margin: auto var(--scale-md);
+}
+.close_btn * {
+  color: var(--secondary-color) !important;
+}
+.submit_btn {
+  text-transform: none;
+  background-color: var(--primary-color);
+  color: var(--off-white);
+  justify-self: end;
+}
+.profile_photo {
+  position: relative;
+  margin: auto;
+  display: grid;
+  place-items: center;
+}
+.photo_edit_btn {
+  position: absolute;
+  top: 40%;
+  left: 48%;
+  z-index: 2;
+  max-width: fit-content;
+}
+.input_group {
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--scale-sm);
+  margin-bottom: var(--scale-md);
+}
+.input_group label {
+  font-size: var(--scale-md);
+  font-weight: 500;
+}
+.input_group input {
+  outline: 1px solid transparent;
+  border: 1px solid var(--secondary-color);
+  height: 3ch;
+  border-radius: 5px;
+  caret-color: var(--primary-color);
+}
+.input_group input:focus,
+.input_group textarea:focus {
+  box-shadow: 0px 0px 2.5px 1px var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.bio_input {
+  border: 1px solid var(--secondary-color);
+  overflow: auto;
+  outline: 1px solid transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none;
+  caret-color: var(--primary-color);
+  border-radius: 5px;
+}

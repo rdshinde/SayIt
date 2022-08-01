@@ -1,0 +1,96 @@
+.comment_wrapper {
+  background-color: var(--white);
+  padding: var(--scale-md);
+  margin: var(--scale-md) auto;
+}
+.comment_row1 {
+  display: grid;
+  grid-template-columns: 0.03fr 0.97fr;
+  justify-content: space-between;
+}
+.user_avatar {
+  border-radius: 50%;
+  max-width: fit-content;
+}
+.dot_seperator {
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+  display: inline-block;
+  background-color: var(--secondary-hover);
+  margin: auto var(--scale-md);
+}
+.info_container {
+  display: grid;
+  grid-template-columns: 0.8fr 1.5fr;
+  align-items: center;
+  justify-content: space-between;
+}
+.info_container div:nth-child(2) {
+  margin-bottom: 15px;
+}
+.comment_user_info {
+  display: grid;
+  grid-template-columns: 0.9fr 0.1fr;
+  align-items: center;
+}
+.info_container > div > h3 {
+  font-size: var(--scale-md);
+  font-weight: 600;
+}
+.info_container > div > span {
+  font-size: var(--scale-md);
+  font-weight: 500;
+  color: var(--secondary-color);
+}
+.comment_content {
+  margin: var(--scale-md) auto;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+.comment_image_container > img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+  cursor: pointer;
+}
+.comment_text_content {
+  margin: var(--scale-md) auto;
+  margin-top: 0;
+}
+.comment_text_content * {
+  font-size: var(--scale-md);
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 2.5ch;
+  color: var(--default-text-color);
+  max-width: 45ch;
+}
+.comment_more_info_btn {
+  justify-self: end;
+  position: relative;
+}
+.comment_more_info_btn * {
+  color: var(--secondary-color);
+}
+.comment_more_info_btn *:hover,
+.comment_cta_btns *:hover {
+  color: var(--primary-color);
+  transition: all 0.4s ease-in 0.1s;
+}
+.comment_cta_btns {
+  margin-top: var(--scale-lg);
+  display: grid;
+  grid-template-columns: 0.4fr 0.4fr 0.4fr 0.1fr;
+  align-items: center;
+}
+.comment_cta_btns span:nth-child(4) {
+  justify-self: center;
+}
+.comment_cta_btns span * {
+  color: var(--secondary-hover);
+}
+.info_container .user_username {
+  font-weight: 600;
+}
