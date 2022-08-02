@@ -2,7 +2,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
-
+.page_backdrop::after {
+  content: "";
+  z-index: 10;
+  inset: 0;
+  position: fixed;
+  background-color: var(--secondary-color);
+  opacity: 0.7;
+}
 .logo_container h1 span {
   color: var(--primary-color);
 }

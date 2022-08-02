@@ -8,7 +8,7 @@ import {
   MdOutlineLogin,
   MdOutlineKeyboardReturn,
 } from "../../services";
-export const LoginForm = ({ data: { authFormHandler } }) => {
+export const LoginForm = ({ data: { authFormHandler, authModalCloser } }) => {
   const [passwordState, setPasswordState] = useState(false);
   const passwordStateHandler = () => {
     setPasswordState((prev) => !prev);
@@ -69,6 +69,7 @@ export const LoginForm = ({ data: { authFormHandler } }) => {
             <button
               type="button"
               className={`btn ${styles.submit_btn} btn-primary-outline`}
+              onClick={authModalCloser}
             >
               <span className={`${styles.label_icon} p-r-sm`}>
                 <MdOutlineKeyboardReturn />

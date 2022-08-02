@@ -1,12 +1,18 @@
 import styles from "./auth-form-modal.module.css";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { IoMdPerson, IoMdPersonAdd } from "../../services";
 import { LoginForm } from "../auth-forms/LoginForm";
 import { SignupForm } from "../auth-forms/SignupForm";
+import { closeModal } from "../../store/modal-management/modal-slice";
 export const AuthFormModal = () => {
   const [authForm, setAuthForm] = useState("login");
   const authFormHandler = (form) => {
     form == "login" ? setAuthForm("login") : setAuthForm("signup");
+  };
+  const dispatch = useDispatch();
+  const authModalCloser = () => {
+    dispatch(closeModal());
   };
   return (
     <section className={styles.modal_wrapper}>
@@ -38,9 +44,9 @@ export const AuthFormModal = () => {
       </div>
       <div className={styles.forms_container}>
         {authForm === "login" ? (
-          <LoginForm data={{ authFormHandler: authFormHandler }} />
+          <LoginForm data={{ authFormHandler, authModalCloser }} />
         ) : (
-          <SignupForm data={{ authFormHandler: authFormHandler }} />
+          <SignupForm data={{ authFormHandler, authModalCloser }} />
         )}
       </div>
     </section>

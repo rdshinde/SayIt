@@ -1,8 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./landing-page.module.css";
+import { AuthFormModal } from "../../components/auth-form-modal/AuthFormModal";
+import { openModal } from "../../store/modal-management/modal-slice";
 export const LandingPage = () => {
+  const { isModalVisible, modalName } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+  const authModalOpener = () => {
+    dispatch(openModal("auth-modal"));
+  };
   return (
     <>
-      <div className={styles.landing_page_wrapper}>
+      <div
+        className={`${styles.landing_page_wrapper} ${
+          isModalVisible ? styles.page_backdrop : ""
+        }`}
+      >
+        {isModalVisible && modalName === "auth-modal" ? <AuthFormModal /> : ""}
+
         <section className={styles.hero_text_section}>
           <div className={styles.logo_container}>
             <h1>
@@ -22,7 +37,12 @@ export const LandingPage = () => {
             </p>
           </div>
           <div className={styles.hero_btns_container}>
-            <button className={`btn ${styles.hero_btn}`}>Join Now</button>
+            <button
+              className={`btn ${styles.hero_btn}`}
+              onClick={authModalOpener}
+            >
+              Join Now
+            </button>
             <button className={`btn ${styles.login_page_btn}`}>
               Already have an account
             </button>

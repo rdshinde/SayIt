@@ -10,7 +10,7 @@ import {
   MdPerson,
   RiFolderUserFill,
 } from "../../services";
-export const SignupForm = ({ data: { authFormHandler } }) => {
+export const SignupForm = ({ data: { authFormHandler, authModalCloser } }) => {
   const [passwordState, setPasswordState] = useState(false);
   const passwordStateHandler = () => {
     setPasswordState((prev) => !prev);
@@ -145,6 +145,7 @@ export const SignupForm = ({ data: { authFormHandler } }) => {
             <button
               type="button"
               className={`btn ${styles.submit_btn} btn-primary-outline`}
+              onClick={authModalCloser}
             >
               <span className={`${styles.label_icon} p-r-sm`}>
                 <MdOutlineKeyboardReturn />
