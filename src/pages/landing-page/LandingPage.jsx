@@ -43,7 +43,10 @@ export const LandingPage = () => {
             >
               Join Now
             </button>
-            <button className={`btn ${styles.login_page_btn}`}>
+            <button
+              className={`btn ${styles.login_page_btn}`}
+              onClick={authModalOpener}
+            >
               Already have an account
             </button>
           </div>
