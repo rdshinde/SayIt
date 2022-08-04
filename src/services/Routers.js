@@ -1,5 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
 import {
   BookmarksPage,
   DetailedPostPage,
@@ -13,6 +15,7 @@ import {
 export const Routers = () => {
   return (
     <>
+     <ToastContainer />
       <Routes>
         <Route path={`/`} element={<LandingPage />} />
         <Route path={`/home`} element={<HomePage />} />

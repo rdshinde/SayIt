@@ -1,8 +1,20 @@
 import styles from "./sidebar.module.css";
 import { Sidenav } from "./sidenav/Sidenav";
 import Jdenticon from "react-jdenticon";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineLogout } from "../../services";
+import { logoutAction } from "../../store/authentication/auth-slice";
 export const Sidebar = () => {
+  const user = useSelector((state) => state.auth.user);
+  console.log(user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(logoutAction());
+    localStorage.clear();
+    navigate("/");
+  };
   return (
     <aside className={styles.sidebar_container}>
       <Sidenav />
@@ -17,10 +29,16 @@ export const Sidebar = () => {
             <Jdenticon size="48" />
           </div>
           <div>
-            <span className="text-4 bold-lg">Rishikesh Shinde</span>
-            <span className="text-secondary bold-md">@rdshinde</span>
+            <span className="text-4 bold-lg">
+              {user?.firstName + " " + user?.lastName}
+            </span>
+            <Link to="/profile" className={styles.profile_link}>
+              <span className="text-primary bold-lg">
+                {"@" + user?.username}
+              </span>
+            </Link>
           </div>
-          <button className="btn text-3">
+          <button className="btn text-3" onClick={logoutHandler}>
             <AiOutlineLogout title="Logout" />
           </button>
         </div>

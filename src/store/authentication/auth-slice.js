@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Toast } from "../../utils";
 const initialState = {
   isUserLoggedIn: false,
   encodedToken: "",
@@ -10,24 +11,23 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     loginAction: (state, action) => {
-      //   state.value += 1;
-      const { encodedToken, user } = action.payload;
+      const { encodedToken, foundUser } = action.payload;
       state.isUserLoggedIn = true;
       state.encodedToken = encodedToken;
-      state.user = { ...user };
+      state.user = { ...foundUser };
     },
-    signupAction: (state) => {
-      //   state.value -= 1;
-    },
-    logoutAction: (state, action) => {
-      //   state.value += action.payload;
+    logoutAction: (state) => {
       state.isUserLoggedIn = false;
       state.encodedToken = "";
       state.user = {};
+      Toast({
+        type: "success",
+        msg: `Logged out successfully!`,
+      });
     },
   },
 });
 
-export const { loginAction, signupAction, logoutAction } = authSlice.actions;
+export const { loginAction, logoutAction } = authSlice.actions;
 
 export default authSlice.reducer;

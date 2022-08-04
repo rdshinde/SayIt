@@ -1,9 +1,60 @@
-export const loginActionHandler = (state) => {
-  return (dispatch) => {};
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import { Toast } from "../../utils";
+import { closeModal } from "../modal-management/modal-slice";
+
+import { loginAction } from "./auth-slice";
+
+export const loginActionHandler = (loginCredentials, navigate) => {
+  return (dispatch) => {
+    const sendLoginData = (async () => {
+      try {
+        const res = await axios.post("/api/auth/login", loginCredentials);
+        if (res.status === 200) {
+          dispatch(loginAction({ ...res.data }));
+          localStorage.setItem("token", res.data.encodedToken);
+          dispatch(closeModal());
+          navigate("/home");
+          Toast({
+            type: "success",
+            msg: `Logged in successfully!`,
+          });
+        }
+      } catch (error) {
+        if (error.response.status === 404) {
+          Toast({
+            type: "success",
+            msg: `Invalid credentials!`,
+          });
+        }
+      } finally {
+      }
+    })();
+  };
 };
-export const signupActionHandler = (state) => {
-  return (dispatch) => {};
-};
-export const logoutActionHandler = (state) => {
-  return (dispatch) => {};
+
+export const retainLoginSession = () => {
+  return (dispatch) => {
+    let setTimeOutId;
+    setTimeOutId = setTimeout(() => {
+      const encodedTokenTemp = localStorage.getItem("token");
+      if (encodedTokenTemp) {
+        const decodedToken = jwt_decode(
+          encodedTokenTemp,
+          process.env.REACT_APP_JWT_SECRET
+        );
+        dispatch(
+          loginAction({
+            encodedToken: encodedTokenTemp,
+            foundUser: decodedToken.attrs,
+          })
+        );
+        Toast({
+          type: "success",
+          msg: `Logged in as @${decodedToken.attrs.username}`,
+        });
+      }
+    });
+    return () => clearTimeout(setTimeOutId);
+  };
 };

@@ -3,7 +3,9 @@
   grid-template-rows: auto 1fr 1.5fr;
   /* max-width: 22.5%; */
 }
-
+.profile_link:hover {
+  text-decoration: none;
+}
 .createpost_cta_container {
   margin: var(--scale-md);
   padding: var(--scale-md);
@@ -20,6 +22,7 @@
 .user_info_container {
   margin: var(--scale-md);
   margin-top: auto;
+  cursor: default;
 }
 .logout_wrapper {
   display: grid;

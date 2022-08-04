@@ -32,6 +32,7 @@ export const PageLayout = ({ children }) => {
         isModalVisible ? styles.page_backdrop : ""
       }`}
     >
+     
       {showModalHandler()}
       <div className={styles.header}>
         <Header />

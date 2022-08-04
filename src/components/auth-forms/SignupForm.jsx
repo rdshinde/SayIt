@@ -1,7 +1,5 @@
 import styles from "./signup-form.module.css";
 import { Formik, Form, Field } from "formik";
-import axios from "axios";
-import * as Yup from "yup";
 import React, { useState } from "react";
 import {
   MdEmail,
@@ -12,66 +10,16 @@ import {
   MdOutlineKeyboardReturn,
   MdPerson,
   RiFolderUserFill,
+  signupHandler,
 } from "../../services";
+import { SignupSchema } from "../../utils";
+
 export const SignupForm = ({ data: { authFormHandler, authModalCloser } }) => {
   const [passwordState, setPasswordState] = useState(false);
   const passwordStateHandler = () => {
     setPasswordState((prev) => !prev);
   };
 
-  const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .min(3, "This is too short!")
-      .max(50, "This is too Long!")
-      .required("This is required field."),
-    lastName: Yup.string()
-      .min(3, "This is too short!")
-      .max(50, "This is too Long!")
-      .required("This is required field."),
-    userName: Yup.string()
-      .min(6, "Minimum six characters needed!")
-      .max(20, "This is too Long!")
-      .required("This is required field."),
-    email: Yup.string()
-      .email("Invalid email address.")
-      .required("This is required field."),
-    password: Yup.string()
-      .required("This is required field.")
-      .min(8, "Password should be eight chars minimum.")
-      .matches(/[^A-Za-z0-9]/g, "Password should contain atleast one symbol"),
-    confirmPassword: Yup.string().when("password", {
-      is: (val) => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf(
-        [Yup.ref("password")],
-        "Both passwords should match."
-      ),
-    }),
-  });
-  const signupHandler = (formData, resetForm) => {
-    const { firstName, lastName, email, userName, password } = formData;
-    const userData = {
-      firstName,
-      lastName,
-      email: email,
-      username: userName,
-      password: password,
-    };
-    const sendData = (async () => {
-      try {
-        const res = await axios.post("/api/auth/signup", userData);
-        if (res.status === 201) {
-          localStorage.setItem("signup_token", res.data.encodedToken);
-          resetForm();
-          authFormHandler("login");
-        }
-      } catch (error) {
-        if (error.response.status === 422) {
-          console.log("Username is already taken!");
-        }
-      } finally {
-      }
-    })();
-  };
   return (
     <section className={styles.form_wrapper}>
       <Formik
@@ -86,7 +34,7 @@ export const SignupForm = ({ data: { authFormHandler, authModalCloser } }) => {
         validationSchema={SignupSchema}
         onSubmit={(values, { resetForm, setSubmitting }) => {
           setTimeout(() => {
-            signupHandler(values, resetForm);
+            signupHandler(values, resetForm, authFormHandler);
             setSubmitting(false);
           }, 400);
         }}
@@ -244,7 +192,9 @@ export const SignupForm = ({ data: { authFormHandler, authModalCloser } }) => {
                   className={`${styles.input_container} ${
                     touched.confirmPassword && errors.confirmPassword
                       ? styles.error
-                      : touched.confirmPassword && styles.success
+                      : touched.confirmPassword &&
+                        values.confirmPassword &&
+                        styles.success
                   }`}
                   error-message={errors.confirmPassword}
                   success-message="Password matched successfully!"
@@ -285,7 +235,9 @@ export const SignupForm = ({ data: { authFormHandler, authModalCloser } }) => {
                   Close
                 </button>
                 <button
-                  className={`btn ${styles.submit_btn} btn-primary`}
+                  className={`btn ${styles.submit_btn} btn-primary ${
+                    isSubmitting && "btn-disabled"
+                  }`}
                   type="submit"
                   disabled={isSubmitting}
                 >
