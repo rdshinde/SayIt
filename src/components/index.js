@@ -16,3 +16,6 @@ export { EditPostModal } from "./edit-post-modal/EditPostModal";
 export { LoginForm } from "./auth-forms/LoginForm";
 export { SignupForm } from "./auth-forms/SignupForm";
 export { AuthFormModal } from "./auth-form-modal/AuthFormModal";
+export { FollowUserShimmerLoader } from "./follow-user-shimmer-loader/FollowUserShimmerLoader";
+export { PostShimmerLoader } from "./post-shimmer-loader/PostShimmerLoader";
+export { SimpleLoader } from "./simple-loader/SimpleLoader";

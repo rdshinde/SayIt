@@ -1,21 +1,24 @@
 import styles from "./auth-form-modal.module.css";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IoMdPerson, IoMdPersonAdd } from "../../services";
 import { LoginForm } from "../auth-forms/LoginForm";
 import { SignupForm } from "../auth-forms/SignupForm";
 import { closeModal } from "../../store/modal-management/modal-slice";
+import { SimpleLoader } from "..";
 export const AuthFormModal = () => {
   const [authForm, setAuthForm] = useState("login");
   const authFormHandler = (form) => {
     form == "login" ? setAuthForm("login") : setAuthForm("signup");
   };
   const dispatch = useDispatch();
+  const { isLoaderVisible, loaderStyle } = useSelector((state) => state.loader);
   const authModalCloser = () => {
     dispatch(closeModal());
   };
   return (
     <section className={styles.modal_wrapper}>
+      {isLoaderVisible && loaderStyle === "simple" && <SimpleLoader />}
       <div className={styles.buttons}>
         <button
           className={`btn ${styles.login_btn} ${

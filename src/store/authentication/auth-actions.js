@@ -1,6 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { Toast } from "../../utils";
+import { removeLoader, showLoader } from "../loader/loader-slice";
 import { closeModal } from "../modal-management/modal-slice";
 
 import { loginAction } from "./auth-slice";
@@ -9,6 +10,7 @@ export const loginActionHandler = (loginCredentials, navigate) => {
   return (dispatch) => {
     const sendLoginData = (async () => {
       try {
+        dispatch(showLoader("simple"));
         const res = await axios.post("/api/auth/login", loginCredentials);
         if (res.status === 200) {
           dispatch(loginAction({ ...res.data }));
@@ -28,6 +30,7 @@ export const loginActionHandler = (loginCredentials, navigate) => {
           });
         }
       } finally {
+        dispatch(removeLoader());
       }
     })();
   };

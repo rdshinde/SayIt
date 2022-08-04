@@ -20,6 +20,7 @@ export const LoginForm = ({ data: { authFormHandler, authModalCloser } }) => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const [initialCredentials, setInitialCredentials] = useState({
     username: "",
     password: "",
@@ -31,6 +32,7 @@ export const LoginForm = ({ data: { authFormHandler, authModalCloser } }) => {
   };
   return (
     <section className={styles.form_wrapper}>
+     
       <Formik
         initialValues={{
           username: initialCredentials.username,
@@ -129,13 +131,15 @@ export const LoginForm = ({ data: { authFormHandler, authModalCloser } }) => {
                   Close
                 </button>
                 <button
-                  className={`btn ${styles.submit_btn} btn-primary`}
+                  className={`btn ${styles.submit_btn} btn-primary ${
+                    isSubmitting && "btn-disabled"
+                  }`}
                   type="submit"
                 >
                   <span className={`${styles.label_icon} p-r-sm`}>
                     <MdOutlineLogin />
                   </span>
-                  Login
+                  {isSubmitting ? "Submitting" : "Login"}
                 </button>
               </div>
               <div className={styles.other_links}>
