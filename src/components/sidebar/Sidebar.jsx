@@ -1,20 +1,23 @@
-import styles from "./sidebar.module.css";
-import { Sidenav } from "./sidenav/Sidenav";
-import Jdenticon from "react-jdenticon";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Jdenticon from "react-jdenticon";
+
+import styles from "./sidebar.module.css";
+import { Sidenav } from "./sidenav/Sidenav";
 import { AiOutlineLogout } from "../../services";
 import { logoutAction } from "../../store/authentication/auth-slice";
+
 export const Sidebar = () => {
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const logoutHandler = () => {
     dispatch(logoutAction());
     localStorage.clear();
     navigate("/");
   };
+
   return (
     <aside className={styles.sidebar_container}>
       <Sidenav />
