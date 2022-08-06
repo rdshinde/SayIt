@@ -77,3 +77,18 @@
   width: 92%;
   font-size: var(--scale-md);
 }
+.upload_info_container {
+  margin: var(--scale-md) auto;
+}
+.image_preview_container {
+  align-items: center;
+}
+.preview_image {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+}
+.remove_image_btn {
+  cursor: pointer;
+  font-size: 12px;
+}
