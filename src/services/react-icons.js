@@ -24,6 +24,7 @@ export {
   BsFillBellFill,
   BsThreeDotsVertical,
   BsBookmark,
+  BsEmojiSmileFill,
 } from "react-icons/bs";
 export { GrGallery } from "react-icons/gr";
 export { CgDetailsMore } from "react-icons/cg";

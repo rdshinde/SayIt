@@ -65,6 +65,7 @@
   display: grid;
   grid-template-columns: 0.7fr 0.3fr;
   justify-content: space-between;
+  position: relative;
 }
 .post_input_btns div {
   padding: var(--scale-sm) 0;
