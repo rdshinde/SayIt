@@ -2,6 +2,7 @@
   background-color: var(--white);
   padding: var(--scale-md);
   margin: var(--scale-md) auto;
+  position: relative;
 }
 .post_row1 {
   display: grid;

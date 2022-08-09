@@ -62,9 +62,9 @@ export function makeServer({ environment = "development" } = {}) {
 
     routes() {
       this.namespace = "api";
-      this.passthrough(
-        "https://api.cloudinary.com/v1_1/dasp4lwr4/image/upload"
-      );
+      // this.passthrough(
+      //   "https://api.cloudinary.com/v1_1/dasp4lwr4/image/upload"
+      // );
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));
       this.post("/auth/login", loginHandler.bind(this));
@@ -119,6 +119,20 @@ export function makeServer({ environment = "development" } = {}) {
         "/users/unfollow/:followUserId/",
         unfollowUserHandler.bind(this)
       );
+
+      this.passthrough(
+        "https://api.cloudinary.com/v1_1/dasp4lwr4/image/upload",
+        ["post"]
+      );
     },
   });
 }
+
+// import { Server } from "miragejs";
+
+// new Server({
+//   routes() {
+//     this.namespace = "cloud";
+
+//   },
+// });

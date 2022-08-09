@@ -21,6 +21,7 @@ export const PostInput = () => {
   const [imageFormData, setImageFormData] = useState(null);
   const [uploadedFileSrc, setUploadedFileSrc] = useState("");
   const dispatch = useDispatch();
+
   const imageInputHandler = (event) => {
     hiddenImageInput.current.click();
   };
@@ -49,7 +50,7 @@ export const PostInput = () => {
   };
 
   const textInputHandler = (e) => {
-    setPostTextInput(e.target.value.trim());
+    setPostTextInput(e.target.value);
   };
 
   useEffect(() => {
@@ -77,6 +78,7 @@ export const PostInput = () => {
       } else {
         // console.log({ postTextInput, imageFormData });
         dispatch(createPost({ postTextInput, imageFormData }));
+        setPostTextInput("");
       }
     } else {
       Toast({ type: "error", msg: "Cannot Process invalid post." });
@@ -99,12 +101,13 @@ export const PostInput = () => {
               placeholder="Write something Here..."
               onChange={textInputHandler}
               value={postTextInput}
+              maxLength={250}
             ></textarea>
             <div
               className={`${styles.characters_count}`}
-              style={{ color: postCharCount === 180 && "red" }}
+              style={{ color: postCharCount === 250 && "red" }}
             >
-              {180 - postCharCount}
+              {250 - postCharCount}
             </div>
           </div>
           <div className={styles.upload_info_container}>

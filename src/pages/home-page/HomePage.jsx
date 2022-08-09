@@ -3,10 +3,18 @@ import { PageLayout } from "../page-layout/PageLayout";
 import styles from "./home-page.module.css";
 import { FaFilter } from "../../services";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 export const HomePage = () => {
   const [filterModalState, setFilterModalState] = useState(false);
   const modalStateHandler = () => {
     setFilterModalState((prev) => !prev);
+  };
+  const allPosts = useSelector((state) => state.posts.allPosts);
+  const returnAllPosts = () => {
+    console.log(allPosts.posts);
+    return allPosts?.map((post, index) => (
+      <Post data={{ post }} key={index} />
+    ));
   };
   return (
     <>
@@ -24,7 +32,7 @@ export const HomePage = () => {
             }}
           />
         </div>
-        <Post />
+        {returnAllPosts()}
       </PageLayout>
     </>
   );

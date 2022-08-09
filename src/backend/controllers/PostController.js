@@ -78,7 +78,6 @@ export const createPostHandler = function (schema, request) {
       );
     }
     const { postData } = JSON.parse(request.requestBody);
-    console.log(postData)
     const post = {
       _id: uuid(),
       ...postData,
@@ -88,8 +87,8 @@ export const createPostHandler = function (schema, request) {
         dislikedBy: [],
       },
       username: user.username,
-      createdAt: formatDate(),
-      updatedAt: formatDate(),
+      createdAt: Math.floor(Date.now() / 1000), //formatDate()
+      updatedAt: Math.floor(Date.now() / 1000),
     };
     this.db.posts.insert(post);
     return new Response(201, {}, { posts: this.db.posts });

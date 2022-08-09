@@ -17,8 +17,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt:  Math.floor(Date.now() / 1000),
+    updatedAt:  Math.floor(Date.now() / 1000),
     comments: [
       {
         _id: uuid(),
@@ -71,7 +71,7 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt:  Math.floor(Date.now() / 1000),
+    updatedAt:  Math.floor(Date.now() / 1000),
   },
 ];
