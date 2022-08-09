@@ -1,8 +1,8 @@
+import { useSelector, useDispatch } from "react-redux";
 import { ShimmerSocialPost } from "react-shimmer-effects";
 import styles from "./post.module.css";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
-
 import React, { useState } from "react";
 import ReactJdenticon from "react-jdenticon";
 import {
@@ -17,10 +17,11 @@ import {
   MdDelete,
 } from "../../services";
 import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
-import { useSelector } from "react-redux";
 import { PostShimmerLoader } from "../post-shimmer-loader/PostShimmerLoader";
+import { bookmarkPost, likePost } from "../../store/post/post-actions";
 export const Post = ({ data: { post } }) => {
   const { _id, content, username, mediaUrl, createdAt } = post;
+  const dispatch = useDispatch();
   const [moreActionModalState, setMoreActionModalState] = useState(false);
   const moreActionModalHandler = () => {
     setMoreActionModalState((prev) => !prev);
@@ -28,6 +29,15 @@ export const Post = ({ data: { post } }) => {
   const { type, value } = useSelector((state) => state.posts.status);
   TimeAgo.locale(en);
   const timeAgo = new TimeAgo("en-US");
+
+  const postLikeHandler = () => {
+    dispatch(likePost({ postId: _id }));
+  };
+
+  const postBookmarkHandler = () => {
+    dispatch(bookmarkPost({ postId: _id }));
+  };
+
   return (
     <article className={styles.post_wrapper}>
       {type === "getAllPosts" && value === "pending" ? (
@@ -77,13 +87,13 @@ export const Post = ({ data: { post } }) => {
               )}
             </div>
             <div className={styles.post_cta_btns}>
-              <span>
+              <span role={"button"} onClick={postLikeHandler}>
                 <AiOutlineHeart size={25} title={`Like`} />
               </span>
               <span>
                 <AiOutlineComment size={25} title={`Comment`} />
               </span>
-              <span>
+              <span role={"button"} onClick={postBookmarkHandler}>
                 <BsBookmark size={20} title={`Add To Bookmarks`} />
               </span>
               <span>

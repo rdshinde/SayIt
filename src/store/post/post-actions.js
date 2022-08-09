@@ -49,6 +49,54 @@ export const createPost = createAsyncThunk(
 );
 
 export const getAllPosts = createAsyncThunk("posts/getPosts", async () => {
-  const { data:{posts} } = await axios.get("/api/posts");
+  const {
+    data: { posts },
+  } = await axios.get("/api/posts");
   return posts;
 });
+
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async ({ postId }) => {
+    const {
+      data: { posts },
+    } = await axios.post(`/api/posts/${postId}`, {}, configHeader);
+    return posts;
+  }
+);
+
+export const editPost = createAsyncThunk(
+  "posts/editPost",
+  async ({ postTextInput, postId }) => {
+    const postData = { content: postTextInput };
+    const {
+      data: { posts },
+    } = await axios.post(
+      `/api/posts/edit/${postId}`,
+      { postData },
+      configHeader
+    );
+    return posts;
+  }
+);
+
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async ({ postId }) => {
+    const {
+      data: { posts },
+    } = await axios.post(`/api/posts/like/${postId}`, {}, configHeader);
+
+    return posts;
+  }
+);
+export const bookmarkPost = createAsyncThunk(
+  "posts/bookmarkPost",
+  async ({ postId }) => {
+    const {
+      data: { bookmarks },
+    } = await axios.post(`/api/users/bookmark/${postId}`, {}, configHeader);
+    console.log(bookmarks);
+    return bookmarks;
+  }
+);

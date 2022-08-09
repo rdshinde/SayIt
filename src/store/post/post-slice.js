@@ -1,9 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Toast } from "../../utils";
-import { createPost, getAllPosts } from "./post-actions";
+import {
+  bookmarkPost,
+  createPost,
+  deletePost,
+  getAllPosts,
+  likePost,
+} from "./post-actions";
 const initialState = {
   allPosts: [],
   timelinePosts: [],
+  bookmarks: [],
   sortBy: "Latest",
   status: {
     type: "",
@@ -44,6 +51,48 @@ export const postSlice = createSlice({
     },
     [getAllPosts.failed]: (state, action) => {
       state.status.value = "error";
+      state.error = action.error.message;
+    },
+
+    [deletePost.pending]: (state) => {
+      state.status.type = "deletePost";
+      state.status.value = "pending";
+    },
+    [deletePost.fulfilled]: (state, action) => {
+      state.allPosts = action.payload;
+      state.status.value = "fulfilled";
+    },
+    [deletePost.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
+    [likePost.pending]: (state) => {
+      state.status.type = "likePost";
+      state.status.value = "pending";
+    },
+    [likePost.fulfilled]: (state, action) => {
+      state.allPosts = action.payload;
+      state.status.value = "fulfilled";
+    },
+    [likePost.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
+    [bookmarkPost.pending]: (state) => {
+      state.status.type = "bookmarkPost";
+      state.status.value = "pending";
+    },
+    [bookmarkPost.fulfilled]: (state, action) => {
+      state.bookmarks = action.payload;
+      state.status.value = "fulfilled";
+    },
+    [bookmarkPost.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
       state.error = action.error.message;
     },
   },
