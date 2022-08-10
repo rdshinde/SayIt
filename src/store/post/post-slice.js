@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Toast } from "../../utils";
 import {
+  addPostComment,
   bookmarkPost,
   createPost,
   deletePost,
@@ -109,6 +110,26 @@ export const postSlice = createSlice({
       Toast({ type: "success", msg: "Post updated successfully!" });
     },
     [editPost.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
+    [addPostComment.pending]: (state) => {
+      state.status.type = "addPostComment";
+      state.status.value = "pending";
+    },
+    [addPostComment.fulfilled]: (state, action) => {
+      const { comments, postId } = action.payload;
+      console.log(comments, postId);
+      state.status.value = "fulfilled";
+      const postToUpdate = state.allPosts.find((post) => post._id === postId);
+      console.log(postToUpdate);
+      postToUpdate.comments = [...comments];
+
+      Toast({ type: "success", msg: "Comment added successfully!" });
+    },
+    [addPostComment.failed]: (state, action) => {
       state.status.value = "error";
       Toast({ type: "error", msg: "An error occurred please try again!!" });
       state.error = action.error.message;

@@ -20,7 +20,9 @@ import {
 import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
 import { PostShimmerLoader } from "../post-shimmer-loader/PostShimmerLoader";
 import { bookmarkPost, likePost } from "../../store/post/post-actions";
+import { CommentInput } from "../comment-input/CommentInput";
 export const Post = ({ data: { post } }) => {
+  const [isCommentInputVisible, setCommentInput] = useState(false);
   const { _id, content, username, mediaUrl, createdAt } = post;
   const dispatch = useDispatch();
   const [moreActionModalState, setMoreActionModalState] = useState(false);
@@ -39,6 +41,9 @@ export const Post = ({ data: { post } }) => {
     dispatch(bookmarkPost({ postId: _id }));
   };
 
+  const commentInputHandler = () => {
+    setCommentInput((prev) => !prev);
+  };
   return (
     <article className={styles.post_wrapper}>
       {type === "getAllPosts" && value === "pending" ? (
@@ -92,7 +97,7 @@ export const Post = ({ data: { post } }) => {
               <span role={"button"} onClick={postLikeHandler}>
                 <AiOutlineHeart size={25} title={`Like`} />
               </span>
-              <span>
+              <span role={"button"} onClick={commentInputHandler}>
                 <AiOutlineComment size={25} title={`Comment`} />
               </span>
               <span role={"button"} onClick={postBookmarkHandler}>
@@ -104,6 +109,11 @@ export const Post = ({ data: { post } }) => {
             </div>
           </section>
         </div>
+      )}
+      {isCommentInputVisible ? (
+        <CommentInput data={{ post, setCommentInput }} />
+      ) : (
+        ""
       )}
     </article>
   );

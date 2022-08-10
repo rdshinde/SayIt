@@ -105,3 +105,18 @@ export const bookmarkPost = createAsyncThunk(
     return bookmarks;
   }
 );
+export const addPostComment = createAsyncThunk(
+  "posts/addPostComment",
+  async ({ postId, text }) => {
+    const commentData = { text: text };
+    const {
+      data: { comments },
+    } = await axios.post(
+      `/api/comments/add/${postId}`,
+      { commentData },
+      configHeader
+    );
+    console.log(comments);
+    return { comments, postId };
+  }
+);
