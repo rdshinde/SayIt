@@ -267,6 +267,7 @@ export const deletePostHandler = function (schema, request) {
       );
     }
     const postId = request.params.postId;
+
     let post = schema.posts.findBy({ _id: postId }).attrs;
     if (post.username !== user.username) {
       return new Response(

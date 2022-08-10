@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./page-layout.module.css";
 import {
   AuthFormModal,
+  EditPostModal,
   EditProfile,
   Header,
   SearchFollowAside,
@@ -20,6 +21,8 @@ export const PageLayout = ({ children }) => {
           return <AuthFormModal />;
         case "edit-profile":
           return <EditProfile />;
+        case "edit-post":
+          return <EditPostModal />;
         default:
           return "";
       }
@@ -32,7 +35,6 @@ export const PageLayout = ({ children }) => {
         isModalVisible ? styles.page_backdrop : ""
       }`}
     >
-     
       {showModalHandler()}
       <div className={styles.header}>
         <Header />

@@ -4,6 +4,7 @@ import styles from "./post.module.css";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import React, { useState } from "react";
+
 import ReactJdenticon from "react-jdenticon";
 import {
   BsThreeDotsVertical,
@@ -68,8 +69,9 @@ export const Post = ({ data: { post } }) => {
                 <BsThreeDotsVertical size={20} title={`More Info`} />
                 <PostMoreActionModal
                   data={{
-                    moreActionModalHandler: moreActionModalHandler,
-                    moreActionModalState: moreActionModalState,
+                    moreActionModalHandler,
+                    moreActionModalState,
+                    post,
                   }}
                 />
               </div>

@@ -24,25 +24,27 @@ export const createPost = createAsyncThunk(
       const config = {
         onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
       };
-      const uploadData = new URLSearchParams(new FormData(imageFormData));
-      // await axios
-      //   .post(
-      //     "https://api.cloudinary.com/v1_1/dasp4lwr4/image/upload",
-      //     imageFormData
-      //   )
-      //   .then((res) => console.log(res.json()))
-      //   .catch((e) => console.log(e));
-      postData(
-        "https://api.cloudinary.com/v1_1/dasp4lwr4/image/upload",
-        uploadData
-      ).then((data) => {
-        console.log(data);
-      });
+      // const uploadData = new URLSearchParams(new FormData(imageFormData));
+      await axios
+        .post(
+          "https://api.cloudinary.com/v1_1/dasp4lwr4/image/upload",
+          imageFormData,
+          config
+        )
+        .then((res) => console.log(res.json()))
+        .catch((e) => console.log(e));
+      // postData(
+      //   "https://api.cloudinary.com/v1_1/dasp4lwr4/image/upload",
+      //   uploadData
+      // ).then((data) => {
+      //   console.log(data);
+      // });
     } else {
       const postData = { content: postTextInput, mediaUrl: "" };
       const {
         data: { posts },
       } = await axios.post("/api/posts", { postData }, configHeader);
+      console.log(posts);
       return posts;
     }
   }
@@ -58,9 +60,11 @@ export const getAllPosts = createAsyncThunk("posts/getPosts", async () => {
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
   async ({ postId }) => {
+    console.log(postId);
     const {
       data: { posts },
-    } = await axios.post(`/api/posts/${postId}`, {}, configHeader);
+    } = await axios.delete(`/api/posts/${postId}`, {}, configHeader);
+    console.log(posts);
     return posts;
   }
 );
@@ -76,6 +80,7 @@ export const editPost = createAsyncThunk(
       { postData },
       configHeader
     );
+
     return posts;
   }
 );

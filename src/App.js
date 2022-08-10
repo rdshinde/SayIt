@@ -6,7 +6,6 @@ import { Routers } from "./services";
 import "./stylesheets/App.css";
 import { retainLoginSession } from "./store/authentication/auth-actions";
 import { getAllPosts } from "./store/post/post-actions";
-import { PostShimmerLoader } from "./components";
 
 let isInitial = true;
 function App() {

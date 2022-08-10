@@ -4,6 +4,7 @@ import {
   bookmarkPost,
   createPost,
   deletePost,
+  editPost,
   getAllPosts,
   likePost,
 } from "./post-actions";
@@ -61,6 +62,7 @@ export const postSlice = createSlice({
     [deletePost.fulfilled]: (state, action) => {
       state.allPosts = action.payload;
       state.status.value = "fulfilled";
+      Toast({ type: "success", msg: "Post deleted successfully!" });
     },
     [deletePost.failed]: (state, action) => {
       state.status.value = "error";
@@ -91,6 +93,22 @@ export const postSlice = createSlice({
       state.status.value = "fulfilled";
     },
     [bookmarkPost.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
+    [editPost.pending]: (state) => {
+      state.status.type = "updatePost";
+      state.status.value = "pending";
+    },
+    [editPost.fulfilled]: (state, action) => {
+      const posts = action.payload;
+      state.status.value = "fulfilled";
+      state.allPosts = [...posts];
+      Toast({ type: "success", msg: "Post updated successfully!" });
+    },
+    [editPost.failed]: (state, action) => {
       state.status.value = "error";
       Toast({ type: "error", msg: "An error occurred please try again!!" });
       state.error = action.error.message;
