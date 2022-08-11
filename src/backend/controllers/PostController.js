@@ -181,7 +181,10 @@ export const likePostHandler = function (schema, request) {
     );
     post.likes.likeCount += 1;
     post.likes.likedBy.push(user);
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: Math.floor(Date.now() / 1000) });
+    this.db.posts.update(
+      { _id: postId },
+      { ...post, updatedAt: Math.floor(Date.now() / 1000) }
+    );
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
@@ -235,7 +238,10 @@ export const dislikePostHandler = function (schema, request) {
     );
     post.likes.dislikedBy.push(user);
     post = { ...post, likes: { ...post.likes, likedBy: updatedLikedBy } };
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: Math.floor(Date.now() / 1000) });
+    this.db.posts.update(
+      { _id: postId },
+      { ...post, updatedAt: Math.floor(Date.now() / 1000) }
+    );
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
@@ -253,7 +259,10 @@ export const dislikePostHandler = function (schema, request) {
  * send DELETE Request at /api/user/posts/:postId
  * */
 export const deletePostHandler = function (schema, request) {
+  console.log('postId');
+
   const user = requiresAuth.call(this, request);
+  console.log('postId');
   try {
     if (!user) {
       return new Response(

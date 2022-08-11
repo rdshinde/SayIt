@@ -44,7 +44,6 @@ export const createPost = createAsyncThunk(
       const {
         data: { posts },
       } = await axios.post("/api/posts", { postData }, configHeader);
-      console.log(posts);
       return posts;
     }
   }
@@ -60,11 +59,14 @@ export const getAllPosts = createAsyncThunk("posts/getPosts", async () => {
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
   async ({ postId }) => {
-    console.log(postId);
+    const token = localStorage.getItem("token");
     const {
       data: { posts },
-    } = await axios.delete(`/api/posts/${postId}`, {}, configHeader);
-    console.log(posts);
+    } = await axios.delete(`/api/posts/${postId}`, {
+      headers: {
+        authorization: token,
+      },
+    });
     return posts;
   }
 );
@@ -80,7 +82,6 @@ export const editPost = createAsyncThunk(
       { postData },
       configHeader
     );
-
     return posts;
   }
 );
@@ -91,7 +92,6 @@ export const likePost = createAsyncThunk(
     const {
       data: { posts },
     } = await axios.post(`/api/posts/like/${postId}`, {}, configHeader);
-
     return posts;
   }
 );
@@ -101,7 +101,6 @@ export const bookmarkPost = createAsyncThunk(
     const {
       data: { bookmarks },
     } = await axios.post(`/api/users/bookmark/${postId}`, {}, configHeader);
-    console.log(bookmarks);
     return bookmarks;
   }
 );
@@ -116,7 +115,6 @@ export const addPostComment = createAsyncThunk(
       { commentData },
       configHeader
     );
-    console.log(comments);
     return { comments, postId };
   }
 );
