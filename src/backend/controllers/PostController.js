@@ -256,13 +256,10 @@ export const dislikePostHandler = function (schema, request) {
 
 /**
  * This handler handles deleting a post in the db.
- * send DELETE Request at /api/user/posts/:postId
+ * send DELETE Request at /api/posts/:postId
  * */
 export const deletePostHandler = function (schema, request) {
-  console.log('postId');
-
   const user = requiresAuth.call(this, request);
-  console.log('postId');
   try {
     if (!user) {
       return new Response(
