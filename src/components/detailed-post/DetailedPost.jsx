@@ -9,15 +9,24 @@ import {
   AiOutlineShareAlt,
 } from "../../services";
 import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
-export const DetailedPost = () => {
+import { TimeAgoDisplay } from "../time-ago-display/TimeAgoDisplay";
+import { useNavigate } from "react-router-dom";
+
+export const DetailedPost = ({ data: { post, setCommentInput } }) => {
+  const { username, content, createdAt } = post;
   const [moreActionModalState, setMoreActionModalState] = useState(false);
   const moreActionModalHandler = () => [
     setMoreActionModalState((prev) => !prev),
   ];
+  const navigate = useNavigate();
   return (
     <section className={styles.details_wrapper}>
       <div className={styles.back_btn}>
-        <span className={styles.back_icon}>
+        <span
+          className={styles.back_icon}
+          role={"button"}
+          onClick={() => navigate(-1)}
+        >
           <IoMdArrowBack size={25} title={`Back`} />
         </span>
         <span className={styles.post_text}>Post</span>
@@ -32,7 +41,7 @@ export const DetailedPost = () => {
           </div>
           <div>
             <h4 className={styles.user_name}>Rishikesh Shinde</h4>
-            <p className={styles.user_username}>@rdshinde</p>
+            <p className={styles.user_username}>@{username}</p>
           </div>
           <div
             className={styles.more_info_btn}
@@ -41,27 +50,25 @@ export const DetailedPost = () => {
             <BsThreeDotsVertical size={20} title={`More Info`} />
             <PostMoreActionModal
               data={{
-                moreActionModalHandler: moreActionModalHandler,
-                moreActionModalState: moreActionModalState,
+                moreActionModalHandler,
+                moreActionModalState,
+                post,
               }}
             />
           </div>
         </div>
         <article className={styles.post_content}>
-          <p className={styles.post_text_content}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, unde
-            doloribus consectetur amet provident id magni mollitia quibusdam ut
-            rerum praesentium suscipit accusamus ullam? Amet sint at quaerat
-            officia blanditiis!
-          </p>
-          <div className={styles.post_image_container}>
+          <p className={styles.post_text_content}>{content}</p>
+          {/* <div className={styles.post_image_container}>
             <img
               src="https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q="
               alt="post_image"
             />
-          </div>
+          </div> */}
           <div className={styles.post_timestamp}>
-            <small>12:11 AM Oct 11 2021</small>
+            <small>
+              <TimeAgoDisplay time={createdAt} />
+            </small>
           </div>
           <div className={styles.post_stats}>
             <div>
@@ -81,7 +88,10 @@ export const DetailedPost = () => {
             <span>
               <AiOutlineHeart size={25} title={`Like`} />
             </span>
-            <span>
+            <span
+              role={"button"}
+              onClick={() => setCommentInput((prev) => !prev)}
+            >
               <AiOutlineComment size={25} title={`Comment`} />
             </span>
             <span>
@@ -96,4 +106,3 @@ export const DetailedPost = () => {
     </section>
   );
 };
-      

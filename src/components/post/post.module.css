@@ -71,6 +71,9 @@
   color: var(--default-text-color);
   max-width: 58ch;
 }
+.post_text_content *:hover {
+  text-decoration: none;
+}
 .post_more_info_btn {
   justify-self: end;
   position: relative;

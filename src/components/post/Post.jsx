@@ -1,8 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { ShimmerSocialPost } from "react-shimmer-effects";
 import styles from "./post.module.css";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en.json";
 import React, { useState } from "react";
 
 import ReactJdenticon from "react-jdenticon";
@@ -21,6 +19,8 @@ import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionMod
 import { PostShimmerLoader } from "../post-shimmer-loader/PostShimmerLoader";
 import { bookmarkPost, likePost } from "../../store/post/post-actions";
 import { CommentInput } from "../comment-input/CommentInput";
+import { TimeAgoDisplay } from "../time-ago-display/TimeAgoDisplay";
+import { Link } from "react-router-dom";
 export const Post = ({ data: { post } }) => {
   const [isCommentInputVisible, setCommentInput] = useState(false);
   const { _id, content, username, mediaUrl, createdAt } = post;
@@ -30,9 +30,6 @@ export const Post = ({ data: { post } }) => {
     setMoreActionModalState((prev) => !prev);
   };
   const { type, value } = useSelector((state) => state.posts.status);
-  TimeAgo.locale(en);
-  const timeAgo = new TimeAgo("en-US");
-
   const postLikeHandler = () => {
     dispatch(likePost({ postId: _id }));
   };
@@ -62,9 +59,9 @@ export const Post = ({ data: { post } }) => {
                 </div>
                 <div>
                   <span className={styles.dot_seperator}></span>
-                  <span className={styles.timestamp}>{`${timeAgo.format(
-                    new Date(createdAt * 1000)
-                  )}`}</span>
+                  <span className={styles.timestamp}>
+                    {<TimeAgoDisplay time={createdAt} />}
+                  </span>
                 </div>
               </div>
               <div
@@ -83,7 +80,9 @@ export const Post = ({ data: { post } }) => {
             </div>
             <div className={styles.post_content}>
               <div className={styles.post_text_content}>
-                <p>{content}</p>
+                <Link to={`/posts/${_id}`}>
+                  <p>{content}</p>
+                </Link>
               </div>
               {mediaUrl ? (
                 <div className={styles.post_image_container}>

@@ -11,10 +11,7 @@ export const HomePage = () => {
   };
   const allPosts = useSelector((state) => state.posts.allPosts);
   const returnAllPosts = () => {
-    console.log(allPosts.posts);
-    return allPosts?.map((post, index) => (
-      <Post data={{ post }} key={index} />
-    ));
+    return allPosts?.map((post, index) => <Post data={{ post }} key={index} />);
   };
   return (
     <>

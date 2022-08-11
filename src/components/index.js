@@ -20,3 +20,4 @@ export { FollowUserShimmerLoader } from "./follow-user-shimmer-loader/FollowUser
 export { PostShimmerLoader } from "./post-shimmer-loader/PostShimmerLoader";
 export { SimpleLoader } from "./simple-loader/SimpleLoader";
 export { EmojiModal } from "./emoji-modal/EmojiModal";
+export { TimeAgoDisplay } from "./time-ago-display/TimeAgoDisplay";

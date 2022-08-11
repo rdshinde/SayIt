@@ -40,7 +40,7 @@ export const createPost = createAsyncThunk(
       //   console.log(data);
       // });
     } else {
-      const postData = { content: postTextInput, mediaUrl: "" };
+      const postData = { content: postTextInput, mediaUrl: "", comments: [] };
       const {
         data: { posts },
       } = await axios.post("/api/posts", { postData }, configHeader);

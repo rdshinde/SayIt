@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { Toast } from "../../utils";
 import {
   addPostComment,
@@ -121,11 +121,9 @@ export const postSlice = createSlice({
     },
     [addPostComment.fulfilled]: (state, action) => {
       const { comments, postId } = action.payload;
-      console.log(comments, postId);
-      state.status.value = "fulfilled";
       const postToUpdate = state.allPosts.find((post) => post._id === postId);
-      console.log(postToUpdate);
       postToUpdate.comments = [...comments];
+      console.log(comments, postId, current(state));
 
       Toast({ type: "success", msg: "Comment added successfully!" });
     },

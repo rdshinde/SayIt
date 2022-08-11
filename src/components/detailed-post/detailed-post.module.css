@@ -1,5 +1,6 @@
 .details_wrapper {
   max-width: fit-content;
+  min-width: 100%;
   background-color: var(--white);
 }
 .post {

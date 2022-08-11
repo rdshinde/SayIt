@@ -22,7 +22,7 @@ export const Routers = () => {
         <Route path={`/profile`} element={<ProfilePage />} />
         <Route path={`/explore`} element={<ExplorePage />} />
         <Route path={`/bookmarks`} element={<BookmarksPage />} />
-        <Route path={`/post/:id`} element={<DetailedPostPage />} />
+        <Route path={`/posts/:id`} element={<DetailedPostPage />} />
         <Route path={`/notifications`} element={<NotificationPage />} />
         <Route path={`*`} element={<PageNotFound />} />
       </Routes>

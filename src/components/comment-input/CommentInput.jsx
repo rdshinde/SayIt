@@ -8,6 +8,7 @@ import {
 } from "../../services";
 import { useDispatch } from "react-redux";
 import { addPostComment } from "../../store/post/post-actions";
+import { Toast } from "../../utils";
 export const CommentInput = ({ data: { post, setCommentInput } }) => {
   const dispatch = useDispatch();
   const { username, _id } = post;
@@ -20,9 +21,13 @@ export const CommentInput = ({ data: { post, setCommentInput } }) => {
     setCommentCharCount(commentTextInput.length);
   }, [commentTextInput]);
   const commentSubmitHandler = () => {
-    dispatch(addPostComment({ postId: _id, text: commentTextInput }));
-    setCommentTextInput("");
-    setCommentInput((prev) => !prev);
+    if (commentTextInput) {
+      dispatch(addPostComment({ postId: _id, text: commentTextInput }));
+      setCommentTextInput("");
+      setCommentInput((prev) => !prev);
+    } else {
+      Toast({ type: "error", msg: "Comment cannot be an empty!" });
+    }
   };
   return (
     <section className={`${styles.comment_input_wrapper}`}>
