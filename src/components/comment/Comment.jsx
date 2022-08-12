@@ -2,27 +2,40 @@ import styles from "./comment.module.css";
 import React, { useState } from "react";
 import ReactJdenticon from "react-jdenticon";
 import {
-  BsThreeDotsVertical,
-  AiFillLike,
   AiOutlineLike,
-  AiFillDislike,
   AiOutlineDislike,
-  AiOutlineComment,
-  CgDetailsMore,
-  BsBookmark,
-  AiOutlineShareAlt,
-  BsBookmarksFill,
+  AiFillEdit,
+  MdDelete,
 } from "../../services";
 import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
 import { TimeAgoDisplay } from "../time-ago-display/TimeAgoDisplay";
+import {
+  openModal,
+  setModalData,
+} from "../../store/modal-management/modal-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePostComment } from "../../store/post/post-actions";
 
 export const Comment = ({ data: { comment, post } }) => {
   const { _id, text, username, createdAt } = comment;
+
   const { _id: postId } = post;
 
   const [moreActionModalState, setMoreActionModalState] = useState(false);
+
   const moreActionModalHandler = () => {
     setMoreActionModalState((prev) => !prev);
+  };
+
+  const dispatch = useDispatch();
+
+  const commentEditHandler = () => {
+    dispatch(openModal("edit-post"));
+    dispatch(setModalData({ data: { post, comment } }));
+  };
+
+  const deleteCommentHandler = () => {
+    dispatch(deletePostComment({ postId, commentId: _id }));
   };
 
   return (
@@ -47,7 +60,7 @@ export const Comment = ({ data: { comment, post } }) => {
                 </span>
               </div>
             </div>
-            <div
+            {/* <div
               className={styles.comment_more_info_btn}
               onClick={moreActionModalHandler}
             >
@@ -58,7 +71,7 @@ export const Comment = ({ data: { comment, post } }) => {
                   moreActionModalState: moreActionModalState,
                 }}
               />
-            </div>
+            </div> */}
           </div>
           <div className={styles.comment_content}>
             <div className={styles.comment_text_content}>
@@ -78,19 +91,11 @@ export const Comment = ({ data: { comment, post } }) => {
             <span>
               <AiOutlineDislike size={20} title={`Downvote`} />
             </span>
-            <span role={"button"} className={`btn-disabled`}>
-              <AiOutlineComment
-                size={20}
-                title={`Add Comment`}
-                className={`btn-disabled`}
-              />
+            <span role={"button"} onClick={commentEditHandler}>
+              <AiFillEdit size={20} title={`Edit Comment.`} />
             </span>
-            <span role={"button"} className={`btn-disabled`}>
-              <AiOutlineShareAlt
-                size={20}
-                title={`Share`}
-                className={`btn-disabled`}
-              />
+            <span role={"button"} onClick={deleteCommentHandler}>
+              <MdDelete size={20} title={`Delete Comment.`} />
             </span>
           </div>
         </section>

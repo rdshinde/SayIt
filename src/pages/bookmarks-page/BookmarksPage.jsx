@@ -4,12 +4,8 @@ import { Post } from "../../components";
 import { PageLayout } from "../page-layout/PageLayout";
 import styles from "./bookmarks-page.module.css";
 export const BookmarksPage = () => {
-  const [bookmarks, setBookmarks] = useState(
-    useSelector((state) => state.posts.bookmarks)
-  );
-  useEffect(() => {
-    
-  }, [bookmarks]);
+  const bookmarks = useSelector((state) => state.posts.bookmarks);
+
   return (
     <>
       <PageLayout>

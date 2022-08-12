@@ -5,8 +5,10 @@ import {
   bookmarkPost,
   createPost,
   deletePost,
+  deletePostComment,
   dislikePost,
   editPost,
+  editPostComment,
   getAllPosts,
   likePost,
   removeBookmarkPost,
@@ -158,6 +160,40 @@ export const postSlice = createSlice({
       Toast({ type: "success", msg: "Comment added successfully!" });
     },
     [addPostComment.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
+    [editPostComment.pending]: (state) => {
+      state.status.type = "editPostComment";
+      state.status.value = "pending";
+    },
+    [editPostComment.fulfilled]: (state, action) => {
+      const { comments, postId } = action.payload;
+      const postToUpdate = state.allPosts.find((post) => post._id === postId);
+      postToUpdate.comments = [...comments];
+
+      Toast({ type: "success", msg: "Comment Updated successfully!" });
+    },
+    [editPostComment.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
+    [deletePostComment.pending]: (state) => {
+      state.status.type = "deletePostComment";
+      state.status.value = "pending";
+    },
+    [deletePostComment.fulfilled]: (state, action) => {
+      const { comments, postId } = action.payload;
+      const postToUpdate = state.allPosts.find((post) => post._id === postId);
+      postToUpdate.comments = [...comments];
+
+      Toast({ type: "success", msg: "Comment Deleted successfully!" });
+    },
+    [deletePostComment.failed]: (state, action) => {
       state.status.value = "error";
       Toast({ type: "error", msg: "An error occurred please try again!!" });
       state.error = action.error.message;

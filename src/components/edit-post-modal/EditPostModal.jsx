@@ -1,7 +1,7 @@
 import styles from "./edit-post-modal.module.css";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editPost } from "../../store/post/post-actions";
+import { editPost, editPostComment } from "../../store/post/post-actions";
 import { closeModal } from "../../store/modal-management/modal-slice";
 
 export const EditPostModal = () => {
@@ -9,21 +9,32 @@ export const EditPostModal = () => {
   const { _id, content, username } = useSelector(
     (state) => state.modal.modalData
   );
+  const { modalData } = useSelector((state) => state.modal);
+  const { _id: commentId, text, username: commentUsername } = modalData.comment;
+  const { _id: commentPostId } = modalData.post;
   const dispatch = useDispatch();
-  const contentChangeHandler = (e) => [setPostcontent(e.target.value)];
+  const contentChangeHandler = (e) => {
+    setPostcontent(e.target.value);
+  };
   const [postContent, setPostcontent] = useState("");
 
   const saveChangesHandler = () => {
-    dispatch(editPost({ postTextInput: postContent, postId: _id }));
+    if (modalData.comment && modalData.post) {
+      dispatch(
+        editPostComment({ postId: commentPostId, commentId, postContent })
+      );
+    } else {
+      dispatch(editPost({ postTextInput: postContent, postId: _id }));
+    }
     closeModalHandler();
   };
   useEffect(() => {
-    if (content) {
-      setPostcontent(content);
+    if (content || text) {
+      setPostcontent(content || text);
     }
   }, [content]);
   useEffect(() => {
-    setPostCharCount(postContent.length);
+    setPostCharCount(postContent.length || text.lenght);
   }, [postContent]);
 
   const closeModalHandler = () => {
@@ -41,7 +52,9 @@ export const EditPostModal = () => {
         </div>
         <div>
           <h3>Rishikesh Shinde</h3>
-          <span className={styles.user_username}>@{username}</span>
+          <span className={styles.user_username}>
+            @{username || commentUsername}
+          </span>
         </div>
       </div>
       <div className={styles.post_text_input}>

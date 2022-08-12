@@ -141,3 +141,38 @@ export const addPostComment = createAsyncThunk(
     return { comments, postId };
   }
 );
+
+export const editPostComment = createAsyncThunk(
+  "posts/editPostComment",
+  async ({ postId, commentId, postContent }) => {
+    const commentData = { text: postContent };
+    const {
+      data: { comments },
+    } = await axios.post(
+      `/api/comments/edit/${postId}/${commentId}`,
+      { commentData },
+      configHeader
+    );
+    return { comments, postId };
+  }
+);
+export const deletePostComment = createAsyncThunk(
+  "posts/editPostComment",
+  async ({ postId, commentId }) => {
+    const token = localStorage.getItem("token");
+    console.log(postId, commentId);
+    const {
+      data: { comments },
+    } = await axios.post(
+      `/api/comments/delete/${postId}/${commentId}`,
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    console.log(postId, commentId);
+    return { comments, postId };
+  }
+);
