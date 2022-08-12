@@ -6,6 +6,7 @@ import {
   AiOutlineDislike,
   AiFillEdit,
   MdDelete,
+  AiFillLike,
 } from "../../services";
 import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
 import { TimeAgoDisplay } from "../time-ago-display/TimeAgoDisplay";
@@ -14,7 +15,12 @@ import {
   setModalData,
 } from "../../store/modal-management/modal-slice";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePostComment } from "../../store/post/post-actions";
+import {
+  deletePostComment,
+  downvotePostComment,
+  upvotePostComment,
+} from "../../store/post/post-actions";
+import { isUserLikedPostComment } from "../../store/post/post-slice";
 
 export const Comment = ({ data: { comment, post } }) => {
   const { _id, text, username, createdAt } = comment;
@@ -37,7 +43,16 @@ export const Comment = ({ data: { comment, post } }) => {
   const deleteCommentHandler = () => {
     dispatch(deletePostComment({ postId, commentId: _id }));
   };
-
+  const currentUser = useSelector((state) => state.auth.user.username);
+  const isUpvotedByUser = isUserLikedPostComment(currentUser, comment);
+  const upvoteHandler = () => {
+    if (isUpvotedByUser) {
+      dispatch(downvotePostComment({ postId, commentId: _id }));
+    } else {
+      dispatch(upvotePostComment({ postId, commentId: _id }));
+    }
+  };
+  console.log(isUpvotedByUser);
   return (
     <article className={styles.comment_wrapper}>
       <div className={styles.comment_row1}>
@@ -85,17 +100,23 @@ export const Comment = ({ data: { comment, post } }) => {
             </div> */}
           </div>
           <div className={styles.comment_cta_btns}>
-            <span>
-              <AiOutlineLike size={20} title={`Upvote`} />
-            </span>
-            <span>
-              <AiOutlineDislike size={20} title={`Downvote`} />
+            <span onClick={upvoteHandler}>
+              {isUpvotedByUser ? (
+                <span className={styles.liked_icon}>
+                  <AiFillLike size={20} title={`Downvote`} />
+                </span>
+              ) : (
+                <AiOutlineLike size={20} title={`Upvote`} />
+              )}
             </span>
             <span role={"button"} onClick={commentEditHandler}>
               <AiFillEdit size={20} title={`Edit Comment.`} />
             </span>
             <span role={"button"} onClick={deleteCommentHandler}>
               <MdDelete size={20} title={`Delete Comment.`} />
+            </span>
+            <span>
+              
             </span>
           </div>
         </section>

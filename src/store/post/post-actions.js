@@ -156,23 +156,46 @@ export const editPostComment = createAsyncThunk(
     return { comments, postId };
   }
 );
+
 export const deletePostComment = createAsyncThunk(
-  "posts/editPostComment",
+  "posts/deletePostComment",
   async ({ postId, commentId }) => {
-    const token = localStorage.getItem("token");
-    console.log(postId, commentId);
     const {
       data: { comments },
     } = await axios.post(
       `/api/comments/delete/${postId}/${commentId}`,
       {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
+      configHeader
     );
+    return { comments, postId };
+  }
+);
+
+export const upvotePostComment = createAsyncThunk(
+  "posts/upvotePostComment",
+  async ({ postId, commentId }) => {
     console.log(postId, commentId);
+    const {
+      data: { comments },
+    } = await axios.post(
+      `/api/comments/upvote/${postId}/${commentId}`,
+      {},
+      configHeader
+    );
+    console.log(comments)
+    return { comments, postId };
+  }
+);
+export const downvotePostComment = createAsyncThunk(
+  "posts/downvotePostComment",
+  async ({ postId, commentId }) => {
+    const {
+      data: { comments },
+    } = await axios.post(
+      `/api/comments/downvote/${postId}/${commentId}`,
+      {},
+      configHeader
+    );
     return { comments, postId };
   }
 );

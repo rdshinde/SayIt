@@ -7,11 +7,13 @@ import {
   deletePost,
   deletePostComment,
   dislikePost,
+  downvotePostComment,
   editPost,
   editPostComment,
   getAllPosts,
   likePost,
   removeBookmarkPost,
+  upvotePostComment,
 } from "./post-actions";
 const initialState = {
   allPosts: [],
@@ -198,6 +200,39 @@ export const postSlice = createSlice({
       Toast({ type: "error", msg: "An error occurred please try again!!" });
       state.error = action.error.message;
     },
+
+    [upvotePostComment.pending]: (state) => {
+      state.status.type = "upvotePostComment";
+      state.status.value = "pending";
+    },
+    [upvotePostComment.fulfilled]: (state, action) => {
+      const { comments, postId } = action.payload;
+      const postToUpdate = state.allPosts.find((post) => post._id === postId);
+      postToUpdate.comments = [...comments];
+
+      Toast({ type: "success", msg: "You liked comment!" });
+    },
+    [upvotePostComment.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
+    [downvotePostComment.pending]: (state) => {
+      state.status.type = "downvotePostComment";
+      state.status.value = "pending";
+    },
+    [downvotePostComment.fulfilled]: (state, action) => {
+      const { comments, postId } = action.payload;
+      const postToUpdate = state.allPosts.find((post) => post._id === postId);
+      postToUpdate.comments = [...comments];
+      Toast({ type: "warning", msg: "You Disliked Comment." });
+    },
+    [downvotePostComment.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
   },
 });
 
@@ -230,4 +265,16 @@ export const isBookmarked = (id, bookmarks) => {
   }
   return isBookmarked;
 };
+
+export const isUserLikedPostComment = (username, comment) => {
+  let isLiked = false;
+  const likedUser = comment.votes.upvotedBy.find(
+    (user) => user.username === username
+  );
+  if (likedUser) {
+    isLiked = true;
+  }
+  return isLiked;
+};
+
 export default postSlice.reducer;

@@ -94,3 +94,6 @@
 .info_container .user_username {
   font-weight: 600;
 }
+.comment_cta_btns .liked_icon * {
+  color: var(--primary-color);
+}
