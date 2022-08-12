@@ -95,6 +95,15 @@ export const likePost = createAsyncThunk(
     return posts;
   }
 );
+export const dislikePost = createAsyncThunk(
+  "posts/dislikePost",
+  async ({ postId }) => {
+    const {
+      data: { posts },
+    } = await axios.post(`/api/posts/dislike/${postId}`, {}, configHeader);
+    return posts;
+  }
+);
 export const bookmarkPost = createAsyncThunk(
   "posts/bookmarkPost",
   async ({ postId }) => {
@@ -104,6 +113,20 @@ export const bookmarkPost = createAsyncThunk(
     return bookmarks;
   }
 );
+export const removeBookmarkPost = createAsyncThunk(
+  "posts/bookmarkPost",
+  async ({ postId }) => {
+    const {
+      data: { bookmarks },
+    } = await axios.post(
+      `/api/users/remove-bookmark/${postId}`,
+      {},
+      configHeader
+    );
+    return bookmarks;
+  }
+);
+
 export const addPostComment = createAsyncThunk(
   "posts/addPostComment",
   async ({ postId, text }) => {

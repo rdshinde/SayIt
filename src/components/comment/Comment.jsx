@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import ReactJdenticon from "react-jdenticon";
 import {
   BsThreeDotsVertical,
-  AiOutlineHeart,
-  AiFillHeart,
+  AiFillLike,
+  AiOutlineLike,
+  AiFillDislike,
+  AiOutlineDislike,
   AiOutlineComment,
   CgDetailsMore,
   BsBookmark,
@@ -71,16 +73,24 @@ export const Comment = ({ data: { comment, post } }) => {
           </div>
           <div className={styles.comment_cta_btns}>
             <span>
-              <AiOutlineHeart size={25} title={`Like`} />
+              <AiOutlineLike size={20} title={`Upvote`} />
             </span>
             <span>
-              <AiOutlineComment size={25} title={`Comment`} />
+              <AiOutlineDislike size={20} title={`Downvote`} />
             </span>
-            <span>
-              <CgDetailsMore size={20} title={`More Info`} />
+            <span role={"button"} className={`btn-disabled`}>
+              <AiOutlineComment
+                size={20}
+                title={`Add Comment`}
+                className={`btn-disabled`}
+              />
             </span>
-            <span>
-              <AiOutlineShareAlt size={25} title={`Share`} />
+            <span role={"button"} className={`btn-disabled`}>
+              <AiOutlineShareAlt
+                size={20}
+                title={`Share`}
+                className={`btn-disabled`}
+              />
             </span>
           </div>
         </section>

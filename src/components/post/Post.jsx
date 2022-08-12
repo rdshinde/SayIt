@@ -2,25 +2,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { ShimmerSocialPost } from "react-shimmer-effects";
 import styles from "./post.module.css";
 import React, { useState } from "react";
-
 import ReactJdenticon from "react-jdenticon";
 import {
   BsThreeDotsVertical,
   AiOutlineHeart,
   AiFillHeart,
   AiOutlineComment,
-  AiOutlineShareAlt,
   BsBookmark,
   BsBookmarksFill,
-  AiFillEdit,
-  MdDelete,
+  AiOutlineShareAlt,
 } from "../../services";
 import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
-import { PostShimmerLoader } from "../post-shimmer-loader/PostShimmerLoader";
-import { bookmarkPost, likePost } from "../../store/post/post-actions";
+import {
+  bookmarkPost,
+  dislikePost,
+  likePost,
+  removeBookmarkPost,
+} from "../../store/post/post-actions";
 import { CommentInput } from "../comment-input/CommentInput";
 import { TimeAgoDisplay } from "../time-ago-display/TimeAgoDisplay";
 import { Link } from "react-router-dom";
+import { isBookmarked, isUserLikedPost } from "../../store/post/post-slice";
+
 export const Post = ({ data: { post } }) => {
   const [isCommentInputVisible, setCommentInput] = useState(false);
   const { _id, content, username, mediaUrl, createdAt } = post;
@@ -30,17 +33,31 @@ export const Post = ({ data: { post } }) => {
     setMoreActionModalState((prev) => !prev);
   };
   const { type, value } = useSelector((state) => state.posts.status);
+
   const postLikeHandler = () => {
-    dispatch(likePost({ postId: _id }));
+    if (isLikedByUser) {
+      dispatch(dislikePost({ postId: _id }));
+    } else {
+      dispatch(likePost({ postId: _id }));
+    }
   };
 
   const postBookmarkHandler = () => {
-    dispatch(bookmarkPost({ postId: _id }));
+    if (isBookmarkedByUser) {
+      dispatch(removeBookmarkPost({ postId: _id }));
+    } else {
+      dispatch(bookmarkPost({ postId: _id }));
+    }
   };
 
   const commentInputHandler = () => {
     setCommentInput((prev) => !prev);
   };
+  const currentUser = useSelector((state) => state.auth.user.username);
+  const bookmarks = useSelector((state) => state.posts.bookmarks);
+  const isLikedByUser = isUserLikedPost(currentUser, post);
+  const isBookmarkedByUser = isBookmarked(_id, bookmarks);
+
   return (
     <article className={styles.post_wrapper}>
       {type === "getAllPosts" && value === "pending" ? (
@@ -94,16 +111,30 @@ export const Post = ({ data: { post } }) => {
             </div>
             <div className={styles.post_cta_btns}>
               <span role={"button"} onClick={postLikeHandler}>
-                <AiOutlineHeart size={25} title={`Like`} />
+                {isLikedByUser ? (
+                  <span className={styles.liked_icon}>
+                    <AiFillHeart size={25} title={`Like`} />
+                  </span>
+                ) : (
+                  <AiOutlineHeart size={25} title={`Like`} />
+                )}
               </span>
               <span role={"button"} onClick={commentInputHandler}>
                 <AiOutlineComment size={25} title={`Comment`} />
               </span>
               <span role={"button"} onClick={postBookmarkHandler}>
-                <BsBookmark size={20} title={`Add To Bookmarks`} />
+                {isBookmarkedByUser ? (
+                  <BsBookmarksFill size={20} title={`Remove from Bookmarks`} />
+                ) : (
+                  <BsBookmark size={20} title={`Add To Bookmarks`} />
+                )}
               </span>
-              <span>
-                <AiOutlineShareAlt size={25} title={`Share`} />
+              <span role={"button"} className="btn btn-disabled">
+                <AiOutlineShareAlt
+                  size={25}
+                  title={`Share`}
+                  className="btn-disabled"
+                />
               </span>
             </div>
           </section>

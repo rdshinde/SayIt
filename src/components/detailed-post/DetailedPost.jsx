@@ -7,18 +7,52 @@ import {
   AiOutlineComment,
   BsBookmark,
   AiOutlineShareAlt,
+  AiFillHeart,
+  BsBookmarksFill,
 } from "../../services";
 import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
 import { TimeAgoDisplay } from "../time-ago-display/TimeAgoDisplay";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import {
+  getTotalPostComments,
+  getTotalPostLikes,
+  isBookmarked,
+  isUserLikedPost,
+} from "../../store/post/post-slice";
+import {
+  bookmarkPost,
+  dislikePost,
+  likePost,
+  removeBookmarkPost,
+} from "../../store/post/post-actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export const DetailedPost = ({ data: { post, setCommentInput } }) => {
-  const { username, content, createdAt } = post;
+  const { _id, username, content, createdAt } = post;
   const [moreActionModalState, setMoreActionModalState] = useState(false);
   const moreActionModalHandler = () => [
     setMoreActionModalState((prev) => !prev),
   ];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.user.username);
+  const postLikeHandler = () => {
+    if (isLikedByUser) {
+      dispatch(dislikePost({ postId: _id }));
+    } else {
+      dispatch(likePost({ postId: _id }));
+    }
+  };
+  const postBookmarkHandler = () => {
+    if (isBookmarkedByUser) {
+      dispatch(removeBookmarkPost({ postId: _id }));
+    } else {
+      dispatch(bookmarkPost({ postId: _id }));
+    }
+  };
+  const isLikedByUser = isUserLikedPost(currentUser, post);
+  const bookmarks = useSelector((state) => state.posts.bookmarks);
+  const isBookmarkedByUser = isBookmarked(_id, bookmarks);
   return (
     <section className={styles.details_wrapper}>
       <div className={styles.back_btn}>
@@ -72,11 +106,11 @@ export const DetailedPost = ({ data: { post, setCommentInput } }) => {
           </div>
           <div className={styles.post_stats}>
             <div>
-              <span className={styles.likes}>43</span>
+              <span className={styles.likes}>{getTotalPostLikes(post)}</span>
               Likes
             </div>
             <div className={styles.comments}>
-              <span>10</span>
+              <span>{getTotalPostComments(post)}</span>
               Comments
             </div>
             <div className={styles.shares}>
@@ -85,8 +119,14 @@ export const DetailedPost = ({ data: { post, setCommentInput } }) => {
             </div>
           </div>
           <div className={styles.post_cta_btns}>
-            <span>
-              <AiOutlineHeart size={25} title={`Like`} />
+            <span role={"button"} onClick={postLikeHandler}>
+              {isLikedByUser ? (
+                <span className={styles.liked_icon}>
+                  <AiFillHeart size={25} title={`Like`} />
+                </span>
+              ) : (
+                <AiOutlineHeart size={25} title={`Like`} />
+              )}
             </span>
             <span
               role={"button"}
@@ -94,11 +134,19 @@ export const DetailedPost = ({ data: { post, setCommentInput } }) => {
             >
               <AiOutlineComment size={25} title={`Comment`} />
             </span>
-            <span>
-              <BsBookmark size={20} title={`Add To Bookmarks`} />
+            <span role={"button"} onClick={postBookmarkHandler}>
+              {isBookmarkedByUser ? (
+                <BsBookmarksFill size={20} title={`Added to Bookmarks`} />
+              ) : (
+                <BsBookmark size={20} title={`Add To Bookmarks`} />
+              )}
             </span>
-            <span>
-              <AiOutlineShareAlt size={25} title={`Share`} />
+            <span role={"button"} className="btn-disabled">
+              <AiOutlineShareAlt
+                size={25}
+                title={`Share`}
+                className="btn-disabled"
+              />
             </span>
           </div>
         </article>

@@ -103,3 +103,6 @@
   cursor: pointer;
   font-weight: 600;
 }
+.liked_icon *{
+  color: var(--primary-color) !important;
+}
