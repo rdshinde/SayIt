@@ -27,7 +27,7 @@ export const Notification = () => {
           </div>
         </div>
         <div className={styles.post_container}>
-          <Post />
+          {/* <Post /> */}
         </div>
       </article>
     </div>
