@@ -20,6 +20,7 @@ export const authSlice = createSlice({
       state.isUserLoggedIn = false;
       state.encodedToken = "";
       state.user = {};
+      localStorage.clear();
       Toast({
         type: "success",
         msg: `Logged out successfully!`,

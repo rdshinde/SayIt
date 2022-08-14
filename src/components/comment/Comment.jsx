@@ -21,6 +21,7 @@ import {
   upvotePostComment,
 } from "../../store/post/post-actions";
 import { isUserLikedPostComment } from "../../store/post/post-slice";
+import { getUserName } from "../../store/user/user-slice";
 
 export const Comment = ({ data: { comment, post } }) => {
   const { _id, text, username, createdAt } = comment;
@@ -52,7 +53,13 @@ export const Comment = ({ data: { comment, post } }) => {
       dispatch(upvotePostComment({ postId, commentId: _id }));
     }
   };
-  console.log(isUpvotedByUser);
+  const users = useSelector((state) => state.users.allUsers);
+  const userName = getUserName(username, users);
+
+  const checkUserAsscess = () => {
+    return currentUser === username;
+  };
+  const isUserAccess = checkUserAsscess();
   return (
     <article className={styles.comment_wrapper}>
       <div className={styles.comment_row1}>
@@ -63,7 +70,7 @@ export const Comment = ({ data: { comment, post } }) => {
           <div className={styles.comment_user_info}>
             <div className={styles.info_container}>
               <div>
-                <h3>Rishikesh Shinde</h3>
+                <h3>{userName}</h3>
                 <span className={styles.user_username}>
                   <span className={`text-primary bold-lg`}> @{username}</span>
                 </span>
@@ -110,14 +117,20 @@ export const Comment = ({ data: { comment, post } }) => {
               )}
             </span>
             <span role={"button"} onClick={commentEditHandler}>
-              <AiFillEdit size={20} title={`Edit Comment.`} />
+              {isUserAccess ? (
+                <AiFillEdit size={20} title={`Edit Comment.`} />
+              ) : (
+                ""
+              )}
             </span>
             <span role={"button"} onClick={deleteCommentHandler}>
-              <MdDelete size={20} title={`Delete Comment.`} />
+              {isUserAccess ? (
+                <MdDelete size={20} title={`Delete Comment.`} />
+              ) : (
+                ""
+              )}
             </span>
-            <span>
-              
-            </span>
+            <span></span>
           </div>
         </section>
       </div>

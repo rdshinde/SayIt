@@ -6,6 +6,7 @@ import { Routers } from "./services";
 import "./stylesheets/App.css";
 import { retainLoginSession } from "./store/authentication/auth-actions";
 import { getAllPosts } from "./store/post/post-actions";
+import { getAllUsers } from "./store/user/user-actions";
 
 let isInitial = true;
 function App() {
@@ -17,6 +18,7 @@ function App() {
     if (isInitial) {
       dispatch(retainLoginSession());
       dispatch(getAllPosts());
+      dispatch(getAllUsers());
       if (location.pathname === "/") {
         navigate("/home");
       }

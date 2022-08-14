@@ -23,6 +23,7 @@ import { CommentInput } from "../comment-input/CommentInput";
 import { TimeAgoDisplay } from "../time-ago-display/TimeAgoDisplay";
 import { Link } from "react-router-dom";
 import { isBookmarked, isUserLikedPost } from "../../store/post/post-slice";
+import { getUserName } from "../../store/user/user-slice";
 
 export const Post = ({ data: { post } }) => {
   const [isCommentInputVisible, setCommentInput] = useState(false);
@@ -57,7 +58,8 @@ export const Post = ({ data: { post } }) => {
   const bookmarks = useSelector((state) => state.posts.bookmarks);
   const isLikedByUser = isUserLikedPost(currentUser, post);
   const isBookmarkedByUser = isBookmarked(_id, bookmarks);
-
+  const users = useSelector((state) => state.users.allUsers);
+  const userName = getUserName(username, users);
   return (
     <article className={styles.post_wrapper}>
       {type === "getAllPosts" && value === "pending" ? (
@@ -71,7 +73,7 @@ export const Post = ({ data: { post } }) => {
             <div className={styles.post_user_info}>
               <div className={styles.info_container}>
                 <div>
-                  <h3>Rishikesh Shinde</h3>
+                  <h3>{userName}</h3>
                   <span className={styles.user_username}>@{username}</span>
                 </div>
                 <div>
@@ -85,7 +87,11 @@ export const Post = ({ data: { post } }) => {
                 className={styles.post_more_info_btn}
                 onClick={moreActionModalHandler}
               >
-                <BsThreeDotsVertical size={20} title={`More Info`} />
+                {username === currentUser ? (
+                  <BsThreeDotsVertical size={20} title={`More Info`} />
+                ) : (
+                  ""
+                )}
                 <PostMoreActionModal
                   data={{
                     moreActionModalHandler,

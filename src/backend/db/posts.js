@@ -22,7 +22,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "adshinde",
         createdAt: Math.floor(Date.now() / 1000),
         text: "Interesting",
         votes: {
@@ -32,7 +32,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "rdshinde",
         createdAt: Math.floor(Date.now() / 1000),
         text: "Wow!",
         votes: {
@@ -51,12 +51,12 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
-    username: "shubhamsoni",
+    username: "adshinde",
 
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "adshinde",
         createdAt: Math.floor(Date.now() / 1000),
         text: "Interesting",
         votes: {
@@ -66,7 +66,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "rdshinde",
         createdAt: Math.floor(Date.now() / 1000),
         text: "Wow!",
         votes: {

@@ -1,10 +1,13 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-const token = localStorage.getItem("token");
-const configHeader = {
-  headers: {
-    authorization: token,
-  },
+
+export const getHeaderConfig = () => {
+  const token = localStorage.getItem("token");
+  return {
+    headers: {
+      authorization: token,
+    },
+  };
 };
 async function postData(url = "", data = {}) {
   const response = await fetch(url, {
@@ -40,10 +43,19 @@ export const createPost = createAsyncThunk(
       //   console.log(data);
       // });
     } else {
+      const token = localStorage.getItem("token");
       const postData = { content: postTextInput, mediaUrl: "", comments: [] };
       const {
         data: { posts },
-      } = await axios.post("/api/posts", { postData }, configHeader);
+      } = await axios.post(
+        "/api/posts",
+        { postData },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       return posts;
     }
   }
@@ -62,11 +74,7 @@ export const deletePost = createAsyncThunk(
     const token = localStorage.getItem("token");
     const {
       data: { posts },
-    } = await axios.delete(`/api/posts/${postId}`, {
-      headers: {
-        authorization: token,
-      },
-    });
+    } = await axios.delete(`/api/posts/${postId}`, getHeaderConfig());
     return posts;
   }
 );
@@ -80,7 +88,7 @@ export const editPost = createAsyncThunk(
     } = await axios.post(
       `/api/posts/edit/${postId}`,
       { postData },
-      configHeader
+      getHeaderConfig()
     );
     return posts;
   }
@@ -91,7 +99,7 @@ export const likePost = createAsyncThunk(
   async ({ postId }) => {
     const {
       data: { posts },
-    } = await axios.post(`/api/posts/like/${postId}`, {}, configHeader);
+    } = await axios.post(`/api/posts/like/${postId}`, {}, getHeaderConfig());
     return posts;
   }
 );
@@ -100,7 +108,7 @@ export const dislikePost = createAsyncThunk(
   async ({ postId }) => {
     const {
       data: { posts },
-    } = await axios.post(`/api/posts/dislike/${postId}`, {}, configHeader);
+    } = await axios.post(`/api/posts/dislike/${postId}`, {}, getHeaderConfig());
     return posts;
   }
 );
@@ -109,7 +117,11 @@ export const bookmarkPost = createAsyncThunk(
   async ({ postId }) => {
     const {
       data: { bookmarks },
-    } = await axios.post(`/api/users/bookmark/${postId}`, {}, configHeader);
+    } = await axios.post(
+      `/api/users/bookmark/${postId}`,
+      {},
+      getHeaderConfig()
+    );
     return bookmarks;
   }
 );
@@ -121,7 +133,7 @@ export const removeBookmarkPost = createAsyncThunk(
     } = await axios.post(
       `/api/users/remove-bookmark/${postId}`,
       {},
-      configHeader
+      getHeaderConfig()
     );
     return bookmarks;
   }
@@ -136,7 +148,7 @@ export const addPostComment = createAsyncThunk(
     } = await axios.post(
       `/api/comments/add/${postId}`,
       { commentData },
-      configHeader
+      getHeaderConfig()
     );
     return { comments, postId };
   }
@@ -151,7 +163,7 @@ export const editPostComment = createAsyncThunk(
     } = await axios.post(
       `/api/comments/edit/${postId}/${commentId}`,
       { commentData },
-      configHeader
+      getHeaderConfig()
     );
     return { comments, postId };
   }
@@ -165,7 +177,7 @@ export const deletePostComment = createAsyncThunk(
     } = await axios.post(
       `/api/comments/delete/${postId}/${commentId}`,
       {},
-      configHeader
+      getHeaderConfig()
     );
     return { comments, postId };
   }
@@ -174,15 +186,13 @@ export const deletePostComment = createAsyncThunk(
 export const upvotePostComment = createAsyncThunk(
   "posts/upvotePostComment",
   async ({ postId, commentId }) => {
-    console.log(postId, commentId);
     const {
       data: { comments },
     } = await axios.post(
       `/api/comments/upvote/${postId}/${commentId}`,
       {},
-      configHeader
+      getHeaderConfig()
     );
-    console.log(comments)
     return { comments, postId };
   }
 );
@@ -194,7 +204,7 @@ export const downvotePostComment = createAsyncThunk(
     } = await axios.post(
       `/api/comments/downvote/${postId}/${commentId}`,
       {},
-      configHeader
+      getHeaderConfig()
     );
     return { comments, postId };
   }

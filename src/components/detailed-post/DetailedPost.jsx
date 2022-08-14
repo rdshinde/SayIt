@@ -26,6 +26,7 @@ import {
   removeBookmarkPost,
 } from "../../store/post/post-actions";
 import { useDispatch, useSelector } from "react-redux";
+import { getUserName } from "../../store/user/user-slice";
 
 export const DetailedPost = ({ data: { post, setCommentInput } }) => {
   const { _id, username, content, createdAt } = post;
@@ -53,6 +54,9 @@ export const DetailedPost = ({ data: { post, setCommentInput } }) => {
   const isLikedByUser = isUserLikedPost(currentUser, post);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
   const isBookmarkedByUser = isBookmarked(_id, bookmarks);
+
+  const users = useSelector((state) => state.users.allUsers);
+  const userName = getUserName(username, users);
   return (
     <section className={styles.details_wrapper}>
       <div className={styles.back_btn}>
@@ -74,14 +78,18 @@ export const DetailedPost = ({ data: { post, setCommentInput } }) => {
             />
           </div>
           <div>
-            <h4 className={styles.user_name}>Rishikesh Shinde</h4>
+            <h4 className={styles.user_name}>{userName}</h4>
             <p className={styles.user_username}>@{username}</p>
           </div>
           <div
             className={styles.more_info_btn}
             onClick={moreActionModalHandler}
           >
-            <BsThreeDotsVertical size={20} title={`More Info`} />
+            {username === currentUser ? (
+              <BsThreeDotsVertical size={20} title={`More Info`} />
+            ) : (
+              ""
+            )}
             <PostMoreActionModal
               data={{
                 moreActionModalHandler,

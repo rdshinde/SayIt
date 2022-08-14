@@ -25,7 +25,7 @@ export const loginActionHandler = (loginCredentials, navigate) => {
       } catch (error) {
         if (error.response.status === 404) {
           Toast({
-            type: "success",
+            type: "error",
             msg: `Invalid credentials!`,
           });
         }

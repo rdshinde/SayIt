@@ -6,7 +6,7 @@ import {
   AiOutlineFileGif,
   AiOutlineVideoCameraAdd,
 } from "../../services";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPostComment } from "../../store/post/post-actions";
 import { Toast } from "../../utils";
 export const CommentInput = ({ data: { post, setCommentInput } }) => {
@@ -29,6 +29,7 @@ export const CommentInput = ({ data: { post, setCommentInput } }) => {
       Toast({ type: "error", msg: "Comment cannot be an empty!" });
     }
   };
+  const currentuser = useSelector((state) => state.auth.user);
   return (
     <section className={`${styles.comment_input_wrapper}`}>
       <div className={styles.comment_input_row1}>
@@ -36,7 +37,9 @@ export const CommentInput = ({ data: { post, setCommentInput } }) => {
           <ReactJdenticon size={40} title={`Profile`} />
         </div>
         <div className={styles.comment_text_input}>
-          <h5 className={styles.user_name}>Rishikesh Shinde</h5>
+          <h5 className={styles.user_name}>
+            {currentuser.firstName} {currentuser.lastName}
+          </h5>
           <h5 className={styles.reply_to_text}>
             replying <span className={styles.reply_to}>@{username}</span>
           </h5>
