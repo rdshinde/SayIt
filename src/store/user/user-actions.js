@@ -9,10 +9,21 @@ export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
   return users;
 });
 
+export const getCurrentUser = createAsyncThunk(
+  "users/getCurrentUser",
+  async ({ userId }) => {
+    console.log("ran");
+    const {
+      data: { user },
+    } = await axios.get(`/api/users/${userId}`);
+    console.log(user);
+    return user;
+  }
+);
+
 export const followUser = createAsyncThunk(
   "users/followUser",
   async ({ followUserId }) => {
-    
     const {
       data: { user, followUser },
     } = await axios.post(
@@ -24,8 +35,6 @@ export const followUser = createAsyncThunk(
     return { user, followUser };
   }
 );
-
-
 
 export const unfollowUser = createAsyncThunk(
   "users/unfollowUser",

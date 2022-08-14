@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Routers } from "./services";
 import "./stylesheets/App.css";
 import { retainLoginSession } from "./store/authentication/auth-actions";
 import { getAllPosts } from "./store/post/post-actions";
 import { getAllUsers } from "./store/user/user-actions";
-
+import { addCurrentUser } from "./store/user/user-slice";
 let isInitial = true;
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   useEffect(() => {
     if (isInitial) {
@@ -25,7 +25,11 @@ function App() {
       isInitial = false;
     }
   }, [dispatch]);
-
+  useEffect(() => {
+    if (user) {
+      dispatch(addCurrentUser({ user }));
+    }
+  }, [user]);
   return (
     <div className="App">
       <Routers />

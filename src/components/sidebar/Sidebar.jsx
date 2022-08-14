@@ -18,6 +18,10 @@ export const Sidebar = () => {
     navigate("/");
   };
 
+  const currentUsername = useSelector(
+    (state) => state.users.currentUser?.username
+  );
+
   return (
     <aside className={styles.sidebar_container}>
       <Sidenav />
@@ -35,7 +39,10 @@ export const Sidebar = () => {
             <span className="text-4 bold-lg">
               {user?.firstName + " " + user?.lastName}
             </span>
-            <Link to="/profile" className={styles.profile_link}>
+            <Link
+              to={`/profile/${currentUsername}`}
+              className={styles.profile_link}
+            >
               <span className="text-primary bold-lg">
                 {"@" + user?.username}
               </span>

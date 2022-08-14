@@ -15,11 +15,11 @@ import {
 export const Routers = () => {
   return (
     <>
-     <ToastContainer />
+      <ToastContainer />
       <Routes>
         <Route path={`/`} element={<LandingPage />} />
         <Route path={`/home`} element={<HomePage />} />
-        <Route path={`/profile`} element={<ProfilePage />} />
+        <Route path={`/profile/:id`} element={<ProfilePage />} />
         <Route path={`/explore`} element={<ExplorePage />} />
         <Route path={`/bookmarks`} element={<BookmarksPage />} />
         <Route path={`/posts/:id`} element={<DetailedPostPage />} />

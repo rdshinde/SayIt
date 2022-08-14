@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Toast } from "../../utils";
-import { followUser, getAllUsers, unfollowUser } from "./user-actions";
+import {
+  followUser,
+  getAllUsers,
+  getCurrentUser,
+  unfollowUser,
+} from "./user-actions";
 
 const initialState = {
   currentUser: {},
@@ -18,8 +23,26 @@ const initialState = {
 export const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    addCurrentUser: (state, action) => {
+      console.log(action.payload);
+      state.currentUser = { ...action.payload.user };
+    },
+  },
   extraReducers: {
+    [getCurrentUser.pending]: (state) => {
+      state.status.type = "getCurrentUser";
+      state.status.value = "pending";
+    },
+    [getCurrentUser.fulfilled]: (state, action) => {
+      state.currentUser = { ...action.payload };
+    },
+    [getCurrentUser.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
     [getAllUsers.pending]: (state) => {
       state.status.type = "getAllUsers";
       state.status.value = "pending";
@@ -59,7 +82,7 @@ export const userSlice = createSlice({
     [unfollowUser.fulfilled]: (state, action) => {
       const { user, followUser } = action.payload;
       state.currentUser = { ...user };
-      
+      console.log(action.payload);
       Toast({
         type: "warning",
         msg: `You are now unfollowing ${followUser.firstName}.`,
@@ -81,5 +104,5 @@ export const getUserName = (userName, users) => {
   });
   return `${user?.firstName} ${user?.lastName}`;
 };
-
+export const { addCurrentUser } = userSlice.actions;
 export default userSlice.reducer;
