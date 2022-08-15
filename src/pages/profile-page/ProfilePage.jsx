@@ -3,26 +3,44 @@ import { PageLayout } from "../page-layout/PageLayout";
 import styles from "./profile-page.module.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export const ProfilePage = () => {
   const { id } = useParams();
+
+  const [userProfile, setUserProfile] = useState({});
+
   const allUsers = useSelector((state) => state.users.allUsers);
+
+  const currentUsername = useSelector((state) => state.auth.user.username);
+
+  const currentUser = useSelector((state) => state.users.currentUser);
+
   const profileToDisplay = allUsers.find((user) => user.username === id);
+
   const allPosts = useSelector((state) => state.posts.allPosts);
+
   const userPosts = allPosts.filter((post) => post.username === id);
-  
- 
+
+  useEffect(() => {
+    if (id === currentUsername) {
+      setUserProfile({ ...currentUser });
+    } else {
+      setUserProfile({ ...profileToDisplay });
+    }
+  }, [id, currentUser]);
   return (
     <>
       <PageLayout>
-        {profileToDisplay ? (
+        {userProfile ? (
           <>
-            <UserProfile data={{ user: profileToDisplay, userPosts }} />
+            <UserProfile data={{ user: userProfile, userPosts }} />
             <div className={styles.title}>
               <h2>Recent Posts</h2>
             </div>
             {userPosts?.map((post) => (
-              <Post data={{ post }} />
+              <Post data={{ post }} key={post._id} />
             ))}
           </>
         ) : (

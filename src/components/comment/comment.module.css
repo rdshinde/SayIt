@@ -97,3 +97,6 @@
 .comment_cta_btns .liked_icon * {
   color: var(--primary-color);
 }
+.comment_wrapper a:hover {
+  text-decoration: none;
+}

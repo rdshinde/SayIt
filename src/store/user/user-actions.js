@@ -12,11 +12,10 @@ export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
 export const getCurrentUser = createAsyncThunk(
   "users/getCurrentUser",
   async ({ userId }) => {
-    console.log("ran");
     const {
       data: { user },
     } = await axios.get(`/api/users/${userId}`);
-    console.log(user);
+
     return user;
   }
 );
@@ -31,7 +30,7 @@ export const followUser = createAsyncThunk(
       {},
       getHeaderConfig()
     );
-    console.log(user, followUser);
+
     return { user, followUser };
   }
 );
@@ -46,7 +45,17 @@ export const unfollowUser = createAsyncThunk(
       {},
       getHeaderConfig()
     );
-    console.log(user, followUser);
+
     return { user, followUser };
+  }
+);
+
+export const editProfile = createAsyncThunk(
+  "users/editProfile",
+  async ({ userData }) => {
+    const {
+      data: { user },
+    } = await axios.post(`/api/users/edit`, { userData }, getHeaderConfig());
+    return user;
   }
 );

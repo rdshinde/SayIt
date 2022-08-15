@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Toast } from "../../utils";
 import {
+  editProfile,
   followUser,
   getAllUsers,
   getCurrentUser,
@@ -10,7 +11,6 @@ import {
 const initialState = {
   currentUser: {},
   allUsers: [],
-  followers: [],
   following: [],
   status: {
     type: "",
@@ -25,7 +25,6 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     addCurrentUser: (state, action) => {
-      console.log(action.payload);
       state.currentUser = { ...action.payload.user };
     },
   },
@@ -38,6 +37,27 @@ export const userSlice = createSlice({
       state.currentUser = { ...action.payload };
     },
     [getCurrentUser.failed]: (state, action) => {
+      state.status.value = "error";
+      Toast({ type: "error", msg: "An error occurred please try again!!" });
+      state.error = action.error.message;
+    },
+
+    [editProfile.pending]: (state) => {
+      state.status.type = "editProfile";
+      state.status.value = "pending";
+    },
+    [editProfile.fulfilled]: (state, action) => {
+      state.currentUser = { ...action.payload };
+      state.allUsers = state.allUsers.map((user) => {
+        if (user._id === action.payload._id) {
+          return { ...user, ...action.payload };
+        } else {
+          return { ...user };
+        }
+      });
+      Toast({ type: "success", msg: "Profile updated successfully!" });
+    },
+    [editProfile.failed]: (state, action) => {
       state.status.value = "error";
       Toast({ type: "error", msg: "An error occurred please try again!!" });
       state.error = action.error.message;
@@ -63,6 +83,13 @@ export const userSlice = createSlice({
     [followUser.fulfilled]: (state, action) => {
       const { user, followUser } = action.payload;
       state.following.push(followUser);
+      state.allUsers = state.allUsers.map((user) => {
+        if (user._id === followUser._id) {
+          return { ...user, ...followUser };
+        } else {
+          return user;
+        }
+      });
       state.currentUser = { ...user };
       Toast({
         type: "success",
@@ -82,7 +109,16 @@ export const userSlice = createSlice({
     [unfollowUser.fulfilled]: (state, action) => {
       const { user, followUser } = action.payload;
       state.currentUser = { ...user };
-      console.log(action.payload);
+      state.following = state.following.filter(
+        (user) => user._id !== followUser._id
+      );
+      state.allUsers = state.allUsers.map((user) => {
+        if (user._id === followUser._id) {
+          return { ...user, ...followUser };
+        } else {
+          return user;
+        }
+      });
       Toast({
         type: "warning",
         msg: `You are now unfollowing ${followUser.firstName}.`,

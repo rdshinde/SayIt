@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { addPostComment } from "../../store/post/post-actions";
 import { Toast } from "../../utils";
+import { Link } from "react-router-dom";
 export const CommentInput = ({ data: { post, setCommentInput } }) => {
   const dispatch = useDispatch();
   const { username, _id } = post;
@@ -41,7 +42,10 @@ export const CommentInput = ({ data: { post, setCommentInput } }) => {
             {currentuser.firstName} {currentuser.lastName}
           </h5>
           <h5 className={styles.reply_to_text}>
-            replying <span className={styles.reply_to}>@{username}</span>
+            replying{" "}
+            <span className={styles.reply_to}>
+              <Link to={`/profile/${username}`}> @{username}</Link>
+            </span>
           </h5>
           <div className={styles.textarea_wrapper}>
             <textarea

@@ -74,7 +74,9 @@ export const Post = ({ data: { post } }) => {
               <div className={styles.info_container}>
                 <div>
                   <h3>{userName}</h3>
-                  <span className={styles.user_username}>@{username}</span>
+                  <span className={styles.user_username}>
+                    <Link to={`/profile/${username}`}> @{username} </Link>
+                  </span>
                 </div>
                 <div>
                   <span className={styles.dot_seperator}></span>

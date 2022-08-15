@@ -46,9 +46,8 @@ export const SearchFollowAside = () => {
           const isUserInFollowing = following.find(
             (followingUser) => user._id === followingUser._id
           );
-          if (!isUserInFollowing) {
-            return <FollowUser data={{ user }} key={index} />;
-          }
+
+          return <FollowUser data={{ user }} key={index} />;
         })}
       </div>
     </aside>

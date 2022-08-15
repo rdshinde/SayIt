@@ -6,12 +6,10 @@
 .comment_input_row1 {
   display: grid;
   grid-template-columns: 0.1fr 0.9fr;
- 
 }
 .comment_input_row2 {
   display: grid;
   grid-template-columns: 0.1fr 0.9fr;
- 
 }
 .user_avatar {
   border-radius: 50%;
@@ -91,4 +89,7 @@
   margin-bottom: var(--scale-sm);
   font-weight: 500;
   cursor: pointer;
+}
+.comment_input_wrapper a:hover {
+  text-decoration: none;
 }

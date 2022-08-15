@@ -22,6 +22,7 @@ import {
 } from "../../store/post/post-actions";
 import { isUserLikedPostComment } from "../../store/post/post-slice";
 import { getUserName } from "../../store/user/user-slice";
+import { Link } from "react-router-dom";
 
 export const Comment = ({ data: { comment, post } }) => {
   const { _id, text, username, createdAt } = comment;
@@ -72,7 +73,9 @@ export const Comment = ({ data: { comment, post } }) => {
               <div>
                 <h3>{userName}</h3>
                 <span className={styles.user_username}>
-                  <span className={`text-primary bold-lg`}> @{username}</span>
+                  <span className={`text-primary bold-lg`}>
+                    <Link to={`/profile/${username}`}> @{username}</Link>
+                  </span>
                 </span>
               </div>
               <div>

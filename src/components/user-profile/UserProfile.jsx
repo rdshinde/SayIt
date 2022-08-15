@@ -1,9 +1,73 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  openModal,
+  setModalData,
+} from "../../store/modal-management/modal-slice";
+import { followUser, unfollowUser } from "../../store/user/user-actions";
 import styles from "./user-profile.module.css";
 export const UserProfile = ({ data: { user, userPosts } }) => {
-  const { firstName, lastName, username, followers, following, bio, website } =
-    user;
+  const {
+    _id,
+    firstName,
+    lastName,
+    username,
+    followers,
+    following,
+    bio,
+    website,
+  } = user;
   const totalPosts = userPosts?.length || 0;
+
+  const currentUsername = useSelector((state) => state.users.currentUser);
+
+  const isInFollowing = useSelector((state) =>
+    state.users.following.some((user) => user.username === username)
+  );
+
+  const setProfileCtaBtn = () => {
+    if (currentUsername.username === username) {
+      return (
+        <button
+          className={`btn btn-primary-outline ${styles.edit_profile_btn}`}
+          onClick={editProfileHandler}
+        >
+          Edit Profile
+        </button>
+      );
+    } else if (isInFollowing) {
+      return (
+        <button
+          className={`btn btn-secondary-outline ${styles.edit_profile_btn}`}
+          onClick={followBtnHandler}
+        >
+          Unfollow
+        </button>
+      );
+    } else if (!isInFollowing) {
+      return (
+        <button
+          className={`btn btn-primary ${styles.edit_profile_btn}`}
+          onClick={followBtnHandler}
+        >
+          Follow
+        </button>
+      );
+    }
+  };
+  const dispatch = useDispatch();
+  const followBtnHandler = () => {
+    if (isInFollowing) {
+      dispatch(unfollowUser({ followUserId: _id }));
+    } else {
+      dispatch(followUser({ followUserId: _id }));
+    }
+  };
+
+  const editProfileHandler = () => {
+    dispatch(openModal("edit-profile"));
+    dispatch(setModalData({data:{ data: {...user} }}));
+  };
   return (
     <section className={styles.user_profile_wrapper}>
       <div className={styles.profile_img}>
@@ -18,12 +82,7 @@ export const UserProfile = ({ data: { user, userPosts } }) => {
         </h4>
         <p className={styles.user_username}>@{username}</p>
 
-        <button
-          className={`btn btn-primary-outline ${styles.edit_profile_btn}`}
-        >
-          Edit Profile
-        </button>
-
+        {setProfileCtaBtn()}
         <p className={styles.user_bio}>{bio}</p>
         <p className={styles.user_website}>
           <a href={website}>{website}</a>
