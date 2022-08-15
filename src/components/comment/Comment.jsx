@@ -2,21 +2,65 @@ import styles from "./comment.module.css";
 import React, { useState } from "react";
 import ReactJdenticon from "react-jdenticon";
 import {
-  BsThreeDotsVertical,
-  AiOutlineHeart,
-  AiFillHeart,
-  AiOutlineComment,
-  CgDetailsMore,
-  BsBookmark,
-  AiOutlineShareAlt,
-  BsBookmarksFill,
+  AiOutlineLike,
+  AiOutlineDislike,
+  AiFillEdit,
+  MdDelete,
+  AiFillLike,
 } from "../../services";
 import { PostMoreActionModal } from "../post-more-action-modal/PostMoreActionModal";
-export const Comment = () => {
+import { TimeAgoDisplay } from "../time-ago-display/TimeAgoDisplay";
+import {
+  openModal,
+  setModalData,
+} from "../../store/modal-management/modal-slice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deletePostComment,
+  downvotePostComment,
+  upvotePostComment,
+} from "../../store/post/post-actions";
+import { isUserLikedPostComment } from "../../store/post/post-slice";
+import { getUserName } from "../../store/user/user-slice";
+import { Link } from "react-router-dom";
+
+export const Comment = ({ data: { comment, post } }) => {
+  const { _id, text, username, createdAt } = comment;
+
+  const { _id: postId } = post;
+
   const [moreActionModalState, setMoreActionModalState] = useState(false);
+
   const moreActionModalHandler = () => {
     setMoreActionModalState((prev) => !prev);
   };
+
+  const dispatch = useDispatch();
+
+  const commentEditHandler = () => {
+    dispatch(openModal("edit-post"));
+    dispatch(setModalData({ data: { post, comment } }));
+  };
+
+  const deleteCommentHandler = () => {
+    dispatch(deletePostComment({ postId, commentId: _id }));
+  };
+  const currentUser = useSelector((state) => state.auth.user.username);
+  const isUpvotedByUser = isUserLikedPostComment(currentUser, comment);
+  const upvoteHandler = () => {
+    if (isUpvotedByUser) {
+      dispatch(downvotePostComment({ postId, commentId: _id }));
+    } else {
+      dispatch(upvotePostComment({ postId, commentId: _id }));
+    }
+  };
+  const users = useSelector((state) => state.users.allUsers);
+  const userName = getUserName(username, users);
+
+  const checkUserAsscess = () => {
+    return currentUser === username;
+  };
+  const isUserAccess = checkUserAsscess();
   return (
     <article className={styles.comment_wrapper}>
       <div className={styles.comment_row1}>
@@ -27,18 +71,21 @@ export const Comment = () => {
           <div className={styles.comment_user_info}>
             <div className={styles.info_container}>
               <div>
-                <h3>Rishikesh Shinde</h3>
+                <h3>{userName}</h3>
                 <span className={styles.user_username}>
-                  replying{" "}
-                  <span className={`text-primary bold-lg`}> @rdshinde</span>
+                  <span className={`text-primary bold-lg`}>
+                    <Link to={`/profile/${username}`}> @{username}</Link>
+                  </span>
                 </span>
               </div>
               <div>
                 <span className={styles.dot_seperator}></span>
-                <span className={styles.timestamp}>1 min ago</span>
+                <span className={styles.timestamp}>
+                  <TimeAgoDisplay time={createdAt} />
+                </span>
               </div>
             </div>
-            <div
+            {/* <div
               className={styles.comment_more_info_btn}
               onClick={moreActionModalHandler}
             >
@@ -49,14 +96,11 @@ export const Comment = () => {
                   moreActionModalState: moreActionModalState,
                 }}
               />
-            </div>
+            </div> */}
           </div>
           <div className={styles.comment_content}>
             <div className={styles.comment_text_content}>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam
-                minima labore perferendis repudiandae.
-              </p>
+              <p>{text}</p>
             </div>
             {/* <div className={styles.comment_image_container}>
               <img
@@ -66,18 +110,30 @@ export const Comment = () => {
             </div> */}
           </div>
           <div className={styles.comment_cta_btns}>
-            <span>
-              <AiOutlineHeart size={25} title={`Like`} />
+            <span onClick={upvoteHandler}>
+              {isUpvotedByUser ? (
+                <span className={styles.liked_icon}>
+                  <AiFillLike size={20} title={`Downvote`} />
+                </span>
+              ) : (
+                <AiOutlineLike size={20} title={`Upvote`} />
+              )}
             </span>
-            <span>
-              <AiOutlineComment size={25} title={`Comment`} />
+            <span role={"button"} onClick={commentEditHandler}>
+              {isUserAccess ? (
+                <AiFillEdit size={20} title={`Edit Comment.`} />
+              ) : (
+                ""
+              )}
             </span>
-            <span>
-              <CgDetailsMore size={20} title={`More Info`} />
+            <span role={"button"} onClick={deleteCommentHandler}>
+              {isUserAccess ? (
+                <MdDelete size={20} title={`Delete Comment.`} />
+              ) : (
+                ""
+              )}
             </span>
-            <span>
-              <AiOutlineShareAlt size={25} title={`Share`} />
-            </span>
+            <span></span>
           </div>
         </section>
       </div>

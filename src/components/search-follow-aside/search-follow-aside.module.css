@@ -39,6 +39,10 @@
   background-color: var(--white);
   padding: var(--scale-md);
 }
+.follower_wrapper_height {
+  max-height: 500px;
+  overflow-y: auto;
+}
 .follower_heading {
   display: grid;
   grid-template-columns: 0.6fr 0.4fr;

@@ -11,6 +11,10 @@ export {
   AiFillEdit,
   AiFillEye,
   AiFillEyeInvisible,
+  AiFillLike,
+  AiOutlineLike,
+  AiFillDislike,
+  AiOutlineDislike,
 } from "react-icons/ai";
 export {
   IoMdRocket,
@@ -24,6 +28,7 @@ export {
   BsFillBellFill,
   BsThreeDotsVertical,
   BsBookmark,
+  BsEmojiSmileFill,
 } from "react-icons/bs";
 export { GrGallery } from "react-icons/gr";
 export { CgDetailsMore } from "react-icons/cg";
@@ -40,3 +45,4 @@ export { GrClose } from "react-icons/gr";
 export { FaFilter } from "react-icons/fa";
 export { FiLogIn } from "react-icons/fi";
 export { RiFolderUserFill } from "react-icons/ri";
+export { RiDislikeLine } from "react-icons/ri";

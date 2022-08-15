@@ -1,5 +1,6 @@
 .details_wrapper {
   max-width: fit-content;
+  min-width: 100%;
   background-color: var(--white);
 }
 .post {
@@ -103,4 +104,7 @@
 }
 .post_cta_btns span * {
   color: var(--secondary-hover);
+}
+.post_cta_btns .liked_icon *{
+  color: var(--primary-color);
 }

@@ -1,13 +1,35 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Jdenticon from "react-jdenticon";
+
 import styles from "./sidebar.module.css";
 import { Sidenav } from "./sidenav/Sidenav";
-import Jdenticon from "react-jdenticon";
 import { AiOutlineLogout } from "../../services";
+import { logoutAction } from "../../store/authentication/auth-slice";
+
 export const Sidebar = () => {
+  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logoutAction());
+    localStorage.clear();
+    navigate("/");
+  };
+
+  const currentUsername = useSelector(
+    (state) => state.users.currentUser?.username
+  );
+
   return (
     <aside className={styles.sidebar_container}>
       <Sidenav />
       <section className={styles.createpost_cta_container}>
-        <button className={`btn ${styles.createpost_cta}`}>
+        <button
+          className={`btn ${styles.createpost_cta}`}
+          onClick={() => navigate(`/home#create_post`)}
+        >
           Create New Post
         </button>
       </section>
@@ -17,10 +39,19 @@ export const Sidebar = () => {
             <Jdenticon size="48" />
           </div>
           <div>
-            <span className="text-4 bold-lg">Rishikesh Shinde</span>
-            <span className="text-secondary bold-md">@rdshinde</span>
+            <span className="text-4 bold-lg">
+              {user?.firstName + " " + user?.lastName}
+            </span>
+            <Link
+              to={`/profile/${currentUsername}`}
+              className={styles.profile_link}
+            >
+              <span className="text-primary bold-lg">
+                {"@" + user?.username}
+              </span>
+            </Link>
           </div>
-          <button className="btn text-3">
+          <button className="btn text-3" onClick={logoutHandler}>
             <AiOutlineLogout title="Logout" />
           </button>
         </div>

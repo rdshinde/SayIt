@@ -54,8 +54,8 @@ export const addPostCommentHandler = function (schema, request) {
       ...commentData,
       username: user.username,
       votes: { upvotedBy: [], downvotedBy: [] },
-      createdAt: formatDate(),
-      updatedAt: formatDate(),
+      createdAt: Math.floor(Date.now() / 1000),
+      updatedAt: Math.floor(Date.now() / 1000),
     };
     const post = schema.posts.findBy({ _id: postId }).attrs;
     post.comments.push(comment);
@@ -107,7 +107,7 @@ export const editPostCommentHandler = function (schema, request) {
     post.comments[commentIndex] = {
       ...post.comments[commentIndex],
       ...commentData,
-      updatedAt: formatDate(),
+      updatedAt: Math.floor(Date.now() / 1000),
     };
     this.db.posts.update({ _id: postId }, post);
     return new Response(201, {}, { comments: post.comments });
@@ -179,6 +179,7 @@ export const deletePostCommentHandler = function (schema, request) {
 
 export const upvotePostCommentHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
+  
   try {
     if (!user) {
       return new Response(
@@ -192,10 +193,10 @@ export const upvotePostCommentHandler = function (schema, request) {
       );
     }
     const { postId, commentId } = request.params;
+    const post = schema.posts.findBy({ _id: postId }).attrs;
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id === commentId
     );
-    const post = schema.posts.findBy({ _id: postId }).attrs;
 
     if (
       post.comments[commentIndex].votes.upvotedBy.some(
@@ -212,7 +213,10 @@ export const upvotePostCommentHandler = function (schema, request) {
       commentIndex
     ].votes.downvotedBy.filter((currUser) => currUser._id !== user._id);
     post.comments[commentIndex].votes.upvotedBy.push(user);
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+    this.db.posts.update(
+      { _id: postId },
+      { ...post, updatedAt: Math.floor(Date.now() / 1000) }
+    );
     return new Response(201, {}, { comments: post.comments });
   } catch (error) {
     return new Response(
@@ -245,10 +249,10 @@ export const downvotePostCommentHandler = function (schema, request) {
       );
     }
     const { postId, commentId } = request.params;
+    const post = schema.posts.findBy({ _id: postId }).attrs;
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id === commentId
     );
-    const post = schema.posts.findBy({ _id: postId }).attrs;
 
     if (
       post.comments[commentIndex].votes.downvotedBy.some(
@@ -265,8 +269,11 @@ export const downvotePostCommentHandler = function (schema, request) {
       commentIndex
     ].votes.upvotedBy.filter((currUser) => currUser._id !== user._id);
     post.comments[commentIndex].votes.downvotedBy.push(user);
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
-    return new Response(201, {}, {  comments: post.comments  });
+    this.db.posts.update(
+      { _id: postId },
+      { ...post, updatedAt: Math.floor(Date.now() / 1000) }
+    );
+    return new Response(201, {}, { comments: post.comments });
   } catch (error) {
     return new Response(
       500,

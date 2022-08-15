@@ -17,12 +17,13 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: Math.floor(Date.now() / 1000),
+    updatedAt: Math.floor(Date.now() / 1000),
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "adshinde",
+        createdAt: Math.floor(Date.now() / 1000),
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -31,7 +32,8 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "rdshinde",
+        createdAt: Math.floor(Date.now() / 1000),
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -49,12 +51,13 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
-    username: "shubhamsoni",
+    username: "adshinde",
 
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "adshinde",
+        createdAt: Math.floor(Date.now() / 1000),
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -63,7 +66,8 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "rdshinde",
+        createdAt: Math.floor(Date.now() / 1000),
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -71,7 +75,7 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: Math.floor(Date.now() / 1000),
+    updatedAt: Math.floor(Date.now() / 1000),
   },
 ];

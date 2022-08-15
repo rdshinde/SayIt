@@ -1,15 +1,41 @@
-import styles from "./page-layout.module.css";
+import { useSelector } from "react-redux";
 import React from "react";
+
+import styles from "./page-layout.module.css";
 import {
-  FollowUser,
+  AuthFormModal,
+  EditPostModal,
+  EditProfile,
   Header,
   SearchFollowAside,
   Sidebar,
 } from "../../components";
-/*${styles.page_backdrop}*/
+
 export const PageLayout = ({ children }) => {
+  const { isModalVisible, modalName } = useSelector((state) => state.modal);
+
+  const showModalHandler = () => {
+    if (isModalVisible) {
+      switch (modalName) {
+        case "auth-form":
+          return <AuthFormModal />;
+        case "edit-profile":
+          return <EditProfile />;
+        case "edit-post":
+          return <EditPostModal />;
+        default:
+          return "";
+      }
+    }
+  };
+
   return (
-    <div className={`${styles.page_wrapper}`}>
+    <div
+      className={`${styles.page_wrapper} ${
+        isModalVisible ? styles.page_backdrop : ""
+      }`}
+    >
+      {showModalHandler()}
       <div className={styles.header}>
         <Header />
       </div>

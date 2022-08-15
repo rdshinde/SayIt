@@ -1,12 +1,36 @@
 import styles from "./comment-input.module.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactJdenticon from "react-jdenticon";
 import {
   GrGallery,
   AiOutlineFileGif,
   AiOutlineVideoCameraAdd,
 } from "../../services";
-export const CommentInput = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { addPostComment } from "../../store/post/post-actions";
+import { Toast } from "../../utils";
+import { Link } from "react-router-dom";
+export const CommentInput = ({ data: { post, setCommentInput } }) => {
+  const dispatch = useDispatch();
+  const { username, _id } = post;
+  const [commentTextInput, setCommentTextInput] = useState("");
+  const textInputHandler = (e) => {
+    setCommentTextInput(e.target.value);
+  };
+  const [commentCharCount, setCommentCharCount] = useState(0);
+  useEffect(() => {
+    setCommentCharCount(commentTextInput.length);
+  }, [commentTextInput]);
+  const commentSubmitHandler = () => {
+    if (commentTextInput) {
+      dispatch(addPostComment({ postId: _id, text: commentTextInput }));
+      setCommentTextInput("");
+      setCommentInput((prev) => !prev);
+    } else {
+      Toast({ type: "error", msg: "Comment cannot be an empty!" });
+    }
+  };
+  const currentuser = useSelector((state) => state.auth.user);
   return (
     <section className={`${styles.comment_input_wrapper}`}>
       <div className={styles.comment_input_row1}>
@@ -14,9 +38,14 @@ export const CommentInput = () => {
           <ReactJdenticon size={40} title={`Profile`} />
         </div>
         <div className={styles.comment_text_input}>
-          <h5 className={styles.user_name}>Rishikesh Shinde</h5>
+          <h5 className={styles.user_name}>
+            {currentuser.firstName} {currentuser.lastName}
+          </h5>
           <h5 className={styles.reply_to_text}>
-            replying <span className={styles.reply_to}>@rdshinde</span>
+            replying{" "}
+            <span className={styles.reply_to}>
+              <Link to={`/profile/${username}`}> @{username}</Link>
+            </span>
           </h5>
           <div className={styles.textarea_wrapper}>
             <textarea
@@ -25,8 +54,16 @@ export const CommentInput = () => {
               cols="55"
               rows="3"
               placeholder="Write something Here..."
+              maxLength={250}
+              onChange={textInputHandler}
+              value={commentTextInput}
             ></textarea>
-            <div className={styles.characters_count}>180</div>
+            <div
+              className={styles.characters_count}
+              style={{ color: commentCharCount === 250 && "red" }}
+            >
+              {250 - commentCharCount}
+            </div>
           </div>
         </div>
       </div>
@@ -34,13 +71,13 @@ export const CommentInput = () => {
         <div></div>
         <div className={styles.comment_input_btns}>
           <div className={styles.media_btns}>
-            <button className={`btn`} style={{ paddingLeft: 0 }}>
+            <button className={`btn btn-disabled`} style={{ paddingLeft: 0 }}>
               <GrGallery size={18} title="Insert Image" />
             </button>
-            <button className={`btn`}>
+            <button className={`btn btn-disabled`}>
               <AiOutlineFileGif size={20} title="Insert Gif" />
             </button>
-            <button className={`btn`}>
+            <button className={`btn btn-disabled`}>
               <AiOutlineVideoCameraAdd size={20} title="Insert Video" />
             </button>
           </div>
@@ -48,6 +85,7 @@ export const CommentInput = () => {
             <button
               className={`btn ${styles.comment_cta_btn}`}
               title={`Add comment`}
+              onClick={commentSubmitHandler}
             >
               Add Comment
             </button>

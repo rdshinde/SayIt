@@ -7,12 +7,14 @@ import {
   CgProfile,
 } from "../../../services";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 export const Sidenav = () => {
   const isLinkActive = ({ isActive }) => {
     return isActive
       ? `${styles.sidenav_link} ${styles.sidenav_active_link}`
       : `${styles.sidenav_link}`;
   };
+  const currentUsername = useSelector((state) => state.auth.user.username);
   return (
     <>
       <section className={styles.sidenav_wrapper}>
@@ -32,7 +34,7 @@ export const Sidenav = () => {
           <BsFillBellFill size={25} title="Notifications" />
           <span>Notifications</span>
         </NavLink>
-        <NavLink to={"/profile"} className={isLinkActive}>
+        <NavLink to={`/profile/${currentUsername}`} className={isLinkActive}>
           <CgProfile size={25} title="Profile" />
           <span>Profile</span>
         </NavLink>

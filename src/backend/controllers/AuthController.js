@@ -7,7 +7,6 @@ const sign = require("jwt-encode");
  * All the routes related to Auth are present here.
  * These are Publicly accessible routes.
  * */
-
 /**
  * This handler handles user signups.
  * send POST Request at /api/auth/signup
@@ -29,7 +28,6 @@ export const signupHandler = function (schema, request) {
       );
     }
     const _id = uuid();
-
     const newUser = {
       _id,
       createdAt: formatDate(),
@@ -42,10 +40,12 @@ export const signupHandler = function (schema, request) {
       bookmarks: [],
     };
     const createdUser = schema.users.create(newUser);
+
     const encodedToken = sign(
       { _id, username },
       process.env.REACT_APP_JWT_SECRET
     );
+
     return new Response(201, {}, { createdUser, encodedToken });
   } catch (error) {
     return new Response(
@@ -81,7 +81,7 @@ export const loginHandler = function (schema, request) {
     }
     if (password === foundUser.password) {
       const encodedToken = sign(
-        { _id: foundUser._id, username },
+        { _id: foundUser._id, username, ...foundUser },
         process.env.REACT_APP_JWT_SECRET
       );
       return new Response(200, {}, { foundUser, encodedToken });
