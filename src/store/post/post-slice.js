@@ -107,6 +107,7 @@ export const postSlice = createSlice({
     [likePost.fulfilled]: (state, action) => {
       state.allPosts = action.payload;
       state.status.value = "fulfilled";
+      Toast({ type: "success", msg: "You liked the post!" });
     },
     [likePost.failed]: (state, action) => {
       state.status.value = "error";
@@ -136,6 +137,7 @@ export const postSlice = createSlice({
     [bookmarkPost.fulfilled]: (state, action) => {
       state.bookmarks = action.payload;
       state.status.value = "fulfilled";
+      Toast({ type: "success", msg: "Post added to bookmarks!" });
     },
     [bookmarkPost.failed]: (state, action) => {
       state.status.value = "error";
@@ -309,7 +311,12 @@ export const getOldestPosts = (posts) => {
 export const getTrendingPosts = (posts) => {
   return [...posts].sort((a, b) => b.likes.likeCount - a.likes.likeCount);
 };
-
+export const getAllPostsLikes = (posts) => {
+  return posts.reduce(
+    (likeCount, currPost) => likeCount + currPost.likes.likeCount,
+    0
+  );
+};
 export const { addFilters } = postSlice.actions;
 
 export default postSlice.reducer;

@@ -86,7 +86,7 @@ export const PostInput = () => {
   };
 
   return (
-    <section className={`${styles.post_input_wrapper}`}>
+    <section className={`${styles.post_input_wrapper}`} id="create_post">
       <div className={styles.post_input_row1}>
         <div className={styles.user_avatar}>
           <ReactJdenticon size={40} title={`Profile`} />

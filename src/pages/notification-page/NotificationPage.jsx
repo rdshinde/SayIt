@@ -8,8 +8,9 @@ export const NotificationPage = () => {
         <div className={styles.title}>
           <h2>Notifications</h2>
         </div>
-        <Notification />
-        <Notification />
+        <h2 className="text-2 text-center text-secondary bold-lg m-t-xxl">
+          You have no notifications!
+        </h2>
       </PageLayout>
     </>
   );

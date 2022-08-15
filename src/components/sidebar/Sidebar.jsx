@@ -26,7 +26,10 @@ export const Sidebar = () => {
     <aside className={styles.sidebar_container}>
       <Sidenav />
       <section className={styles.createpost_cta_container}>
-        <button className={`btn ${styles.createpost_cta}`}>
+        <button
+          className={`btn ${styles.createpost_cta}`}
+          onClick={() => navigate(`/home#create_post`)}
+        >
           Create New Post
         </button>
       </section>
