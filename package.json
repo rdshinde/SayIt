@@ -21,6 +21,7 @@
     "react-scripts": "5.0.1",
     "react-shimmer-effects": "^1.0.2",
     "react-toastify": "^9.0.7",
+    "svgo": "^2.8.0",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
   },
