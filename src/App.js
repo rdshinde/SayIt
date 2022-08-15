@@ -8,6 +8,7 @@ import { retainLoginSession } from "./store/authentication/auth-actions";
 import { getAllPosts } from "./store/post/post-actions";
 import { getAllUsers } from "./store/user/user-actions";
 import { addCurrentUser } from "./store/user/user-slice";
+import { addFilters } from "./store/post/post-slice";
 let isInitial = true;
 function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function App() {
       dispatch(retainLoginSession());
       dispatch(getAllPosts());
       dispatch(getAllUsers());
+      dispatch(addFilters(""));
       if (location.pathname === "/") {
         navigate("/home");
       }

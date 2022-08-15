@@ -19,7 +19,7 @@ const initialState = {
   allPosts: [],
   timelinePosts: [],
   bookmarks: [],
-  sortBy: "Latest",
+  sortBy: "",
   status: {
     type: "",
     value: "idle",
@@ -31,14 +31,37 @@ const initialState = {
 export const postSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    addFilters: (state, action) => {
+      switch (action.payload) {
+        case "LATEST_POSTS":
+          state.sortBy = "LATEST_POSTS";
+          state.allPosts = getLatestPosts(state.allPosts);
+          break;
+        case "OLDEST_POSTS":
+          state.sortBy = "OLDEST_POSTS";
+          state.allPosts = getOldestPosts(state.allPosts);
+          break;
+        case "TRENDING_POSTS":
+          state.sortBy = "TRENDING_POSTS";
+          state.allPosts = getTrendingPosts(state.allPosts);
+          break;
+        case "CLEAR_FILTERS":
+          state.sortBy = "";
+          state.allPosts = getLatestPosts(state.allPosts);
+          break;
+        default:
+          state.allPosts = state.allPosts;
+          break;
+      }
+    },
+  },
   extraReducers: {
     [createPost.pending]: (state) => {
       state.status.type = "createPost";
       state.status.value = "pending";
     },
     [createPost.fulfilled]: (state, action) => {
-      // state.allPosts.push(action.payload);
       state.allPosts = [...action.payload];
       state.status.value = "fulfilled";
       Toast({ type: "success", msg: "Post added!" });
@@ -157,7 +180,7 @@ export const postSlice = createSlice({
     [addPostComment.fulfilled]: (state, action) => {
       const { comments, postId } = action.payload;
       const postToUpdate = state.allPosts.find((post) => post._id === postId);
-      postToUpdate.comments = [...comments];
+      postToUpdate.comments = getLatestPosts([...comments]);
 
       Toast({ type: "success", msg: "Comment added successfully!" });
     },
@@ -174,7 +197,7 @@ export const postSlice = createSlice({
     [editPostComment.fulfilled]: (state, action) => {
       const { comments, postId } = action.payload;
       const postToUpdate = state.allPosts.find((post) => post._id === postId);
-      postToUpdate.comments = [...comments];
+      postToUpdate.comments = getLatestPosts([...comments]);
 
       Toast({ type: "success", msg: "Comment Updated successfully!" });
     },
@@ -191,7 +214,7 @@ export const postSlice = createSlice({
     [deletePostComment.fulfilled]: (state, action) => {
       const { comments, postId } = action.payload;
       const postToUpdate = state.allPosts.find((post) => post._id === postId);
-      postToUpdate.comments = [...comments];
+      postToUpdate.comments = getLatestPosts([...comments]);
 
       Toast({ type: "success", msg: "Comment Deleted successfully!" });
     },
@@ -208,7 +231,7 @@ export const postSlice = createSlice({
     [upvotePostComment.fulfilled]: (state, action) => {
       const { comments, postId } = action.payload;
       const postToUpdate = state.allPosts.find((post) => post._id === postId);
-      postToUpdate.comments = [...comments];
+      postToUpdate.comments = getLatestPosts([...comments]);
 
       Toast({ type: "success", msg: "You liked comment!" });
     },
@@ -225,7 +248,7 @@ export const postSlice = createSlice({
     [downvotePostComment.fulfilled]: (state, action) => {
       const { comments, postId } = action.payload;
       const postToUpdate = state.allPosts.find((post) => post._id === postId);
-      postToUpdate.comments = [...comments];
+      postToUpdate.comments = getLatestPosts([...comments]);
       Toast({ type: "warning", msg: "You Disliked Comment." });
     },
     [downvotePostComment.failed]: (state, action) => {
@@ -276,5 +299,17 @@ export const isUserLikedPostComment = (username, comment) => {
   }
   return isLiked;
 };
+
+export const getLatestPosts = (posts) => {
+  return [...posts].sort((a, b) => b.createdAt - a.createdAt);
+};
+export const getOldestPosts = (posts) => {
+  return [...posts].sort((a, b) => a.createdAt - b.createdAt);
+};
+export const getTrendingPosts = (posts) => {
+  return [...posts].sort((a, b) => b.likes.likeCount - a.likes.likeCount);
+};
+
+export const { addFilters } = postSlice.actions;
 
 export default postSlice.reducer;

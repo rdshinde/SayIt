@@ -1,18 +1,39 @@
-import { FilterModal, Post, PostInput } from "../../components";
-import { PageLayout } from "../page-layout/PageLayout";
-import styles from "./home-page.module.css";
-import { FaFilter } from "../../services";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+
+import { PageLayout } from "../page-layout/PageLayout";
+import { FaFilter } from "../../services";
+import styles from "./home-page.module.css";
+import { FilterModal, Post, PostInput } from "../../components";
+import { getLatestPosts } from "../../store/post/post-slice";
+
 export const HomePage = () => {
   const [filterModalState, setFilterModalState] = useState(false);
+  const [postsToShow, setPostsToShow] = useState([]);
+
   const modalStateHandler = () => {
     setFilterModalState((prev) => !prev);
   };
+
   const allPosts = useSelector((state) => state.posts.allPosts);
+
+  const recentPosts = getLatestPosts(allPosts);
   const returnAllPosts = () => {
-    return allPosts?.map((post, index) => <Post data={{ post }} key={index} />);
+    return postsToShow?.map((post, index) => (
+      <Post data={{ post }} key={index} />
+    ));
   };
+
+  const filterState = useSelector((state) => state.posts.sortBy);
+
+  useEffect(() => {
+    if (filterState === "") {
+      setPostsToShow([...recentPosts]);
+    } else {
+      setPostsToShow([...allPosts]);
+    }
+  }, [allPosts]);
+
   return (
     <>
       <PageLayout>
