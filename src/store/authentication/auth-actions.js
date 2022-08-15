@@ -36,7 +36,7 @@ export const loginActionHandler = (loginCredentials, navigate) => {
   };
 };
 
-export const retainLoginSession = () => {
+export const retainLoginSession = (navigate) => {
   return (dispatch) => {
     let setTimeOutId;
     setTimeOutId = setTimeout(() => {
@@ -56,6 +56,8 @@ export const retainLoginSession = () => {
           type: "success",
           msg: `Logged in as @${decodedToken.attrs.username}`,
         });
+      } else {
+        navigate(`/`);
       }
     });
     return () => clearTimeout(setTimeOutId);

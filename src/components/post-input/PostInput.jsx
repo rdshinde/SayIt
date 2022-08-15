@@ -140,11 +140,15 @@ export const PostInput = () => {
         <div className={styles.post_input_btns}>
           <div className={styles.media_btns}>
             <button
-              className={`btn`}
+              className={`btn btn-disabled`}
               style={{ paddingLeft: "0" }}
               onClick={imageInputHandler}
             >
-              <GrGallery size={18} title="Insert Image" />
+              <GrGallery
+                size={18}
+                className="btn-disabled"
+                title="Insert Image"
+              />
             </button>
             <input
               type="file"

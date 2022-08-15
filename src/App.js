@@ -17,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (isInitial) {
-      dispatch(retainLoginSession());
+      dispatch(retainLoginSession(navigate));
       dispatch(getAllPosts());
       dispatch(getAllUsers());
       dispatch(addFilters(""));
@@ -32,6 +32,7 @@ function App() {
       dispatch(addCurrentUser({ user }));
     }
   }, [user]);
+
   return (
     <div className="App">
       <Routers />
