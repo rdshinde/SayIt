@@ -6,9 +6,11 @@ import {
   getAllPostsLikes,
   getTrendingPosts,
 } from "../../store/post/post-slice";
+import { SetDocumentTitle } from "../../utils";
 import { PageLayout } from "../page-layout/PageLayout";
 import styles from "./explore-page.module.css";
 export const ExplorePage = () => {
+  SetDocumentTitle("Explore | SayIt");
   const allPosts = useSelector((state) => state.posts.allPosts);
   const [postsToDisplay, setPostsToDisplay] = useState([...allPosts]);
 

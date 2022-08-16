@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./landing-page.module.css";
 import { AuthFormModal } from "../../components/auth-form-modal/AuthFormModal";
 import { openModal } from "../../store/modal-management/modal-slice";
+import { SetDocumentTitle } from "../../utils";
 export const LandingPage = () => {
   const { isModalVisible, modalName } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   const authModalOpener = () => {
     dispatch(openModal("auth-modal"));
   };
+  SetDocumentTitle("SayIt");
   return (
     <>
       <div

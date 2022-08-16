@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Post } from "../../components";
+import { SetDocumentTitle } from "../../utils";
 import { PageLayout } from "../page-layout/PageLayout";
 import styles from "./bookmarks-page.module.css";
 export const BookmarksPage = () => {
   const bookmarks = useSelector((state) => state.posts.bookmarks);
-
+  SetDocumentTitle("Bookmarks | SayIt");
   return (
     <>
       <PageLayout>

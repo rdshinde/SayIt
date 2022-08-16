@@ -5,8 +5,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
+import { SetDocumentTitle } from "../../utils";
 
 export const ProfilePage = () => {
+  SetDocumentTitle("Profile | SayIt");
+
   const { id } = useParams();
 
   const [userProfile, setUserProfile] = useState({});

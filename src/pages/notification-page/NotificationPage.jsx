@@ -1,7 +1,9 @@
 import { Notification } from "../../components";
+import { SetDocumentTitle } from "../../utils";
 import { PageLayout } from "../page-layout/PageLayout";
 import styles from "./notification-page.module.css";
 export const NotificationPage = () => {
+  SetDocumentTitle("Notifications | SayIt");
   return (
     <>
       <PageLayout>

@@ -6,6 +6,7 @@ import { FaFilter } from "../../services";
 import styles from "./home-page.module.css";
 import { FilterModal, Post, PostInput } from "../../components";
 import { getLatestPosts } from "../../store/post/post-slice";
+import { SetDocumentTitle } from "../../utils";
 
 export const HomePage = () => {
   const [filterModalState, setFilterModalState] = useState(false);
@@ -33,7 +34,7 @@ export const HomePage = () => {
       setPostsToShow([...allPosts]);
     }
   }, [allPosts]);
-
+  SetDocumentTitle("Home | SayIt");
   return (
     <>
       <PageLayout>

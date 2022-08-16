@@ -4,8 +4,10 @@ import { Comment, CommentInput, DetailedPost } from "../../components";
 import { PageLayout } from "../page-layout/PageLayout";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { SetDocumentTitle } from "../../utils";
 
 export const DetailedPostPage = () => {
+  SetDocumentTitle("Post | SayIt");
   const { id } = useParams();
   const allPosts = useSelector((state) => state.posts.allPosts);
   const post = allPosts.find((post) => post._id === id);
