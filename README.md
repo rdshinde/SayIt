@@ -1,5 +1,5 @@
 <div align="center">
-  <h1><a href="https://sayit.vercel.app"> SayIt </a></h1>
+  <h1><a href="https://sayit-social.vercel.app"> SayIt </a></h1>
   
   
   The freespeech social media app. 
@@ -46,4 +46,4 @@ $ npm start
 
 ## **Live Project -**
 
-Here it is [SayIt](https://sayit.vercel.app/)
+Here it is [SayIt](https://sayit-social.vercel.app)
